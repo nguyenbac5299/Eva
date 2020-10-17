@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Eva</string>
+    <string name="title">Để dự đoán chính xác, bạn hãy trả lời 3 câu hỏi sau</string>
+    <string name="know">Tôi không biết</string>
+    <string name="detail_setup_period">Trung bình giai đoạn kinh nguyệt của bạn kéo dài trong bao lâu?</string>
+    <string name="detail_setup_cycle">Trung bình, chu kỳ của bạn dài bao lâu?</string>
+    <string name="detail_setup_calendar">Giai đoạn cuối của bạn bắt đầu khi nào?</string>
+</resources>

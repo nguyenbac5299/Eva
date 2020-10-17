@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7878383"
+    tools:context=".MainActivity">
+
+
+    <FrameLayout
+        android:id="@+id/frame_fragment_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/text_demo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="demo"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_menu"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_home_off_24" />
+
+        <ImageView
+
+            android:id="@+id/image_calendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="25dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_calendar_off_24" />
+
+        <ImageView
+
+            android:id="@+id/image_chart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_equalizer_off_24" />
+
+        <ImageView
+            android:id="@+id/image_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_menu_off_24" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/linear_menu"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorLine" />
+
+
+</RelativeLayout>
