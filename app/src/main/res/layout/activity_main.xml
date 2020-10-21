@@ -4,21 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7878383"
-    tools:context=".MainActivity">
+    android:background="#FFFFFF"
+    tools:context=".activity.MainActivity">
 
-
-    <FrameLayout
-        android:id="@+id/frame_fragment_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
-        <TextView
-            android:id="@+id/text_demo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="demo"/>
-    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linear_menu"
@@ -69,6 +57,13 @@
         android:layout_above="@+id/linear_menu"
         android:layout_marginBottom="5dp"
         android:background="@color/colorLine" />
+    <FrameLayout
+        android:id="@+id/frame_fragment_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:layout_above="@+id/linear_menu">
+    </FrameLayout>
 
 
 </RelativeLayout>

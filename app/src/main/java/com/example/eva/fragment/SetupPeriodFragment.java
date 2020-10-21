@@ -32,6 +32,7 @@ public class SetupPeriodFragment extends Fragment {
                 mListener.onChangePeriod(mPeriod);
             }
         });
+        mListener.onChangePeriod(mPeriod);
 
         return view;
     }

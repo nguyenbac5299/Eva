@@ -33,6 +33,7 @@ public class SetupCycleFragment extends Fragment {
                 mListener.onChangeCycle(mCycle);
             }
         });
+        mListener.onChangeCycle(mCycle);
 
         return view;
     }

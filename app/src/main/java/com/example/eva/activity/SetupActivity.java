@@ -1,4 +1,4 @@
-package com.example.eva;
+package com.example.eva.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,10 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.eva.model.CyclePeriod;
+import com.example.eva.R;
 import com.example.eva.callback.OnSetupPeriodCycleListener;
 import com.example.eva.fragment.SetupCalendarFragment;
 import com.example.eva.fragment.SetupCycleFragment;
 import com.example.eva.fragment.SetupPeriodFragment;
+import com.example.eva.model.DateCyclePeriod;
+
+import java.util.Date;
 
 
 public class SetupActivity extends AppCompatActivity implements OnSetupPeriodCycleListener {
@@ -46,12 +51,13 @@ public class SetupActivity extends AppCompatActivity implements OnSetupPeriodCyc
             public void onClick(View v) {
                 Fragment currentFragment = fragmentManager.findFragmentById(R.id.linear_fragment);
                 if (currentFragment instanceof SetupPeriodFragment) {
+                    if (fragmentSetupCycle==null){
                     Log.d("Setup", "Fragment Cycle");
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentSetupCycle = new SetupCycleFragment();
                     fragmentTransaction.replace(R.id.linear_fragment, fragmentSetupCycle, "CYCLE")
                             .addToBackStack("CYCLE")
-                            .commit();
+                            .commit();}
                     textDetail.setText(getResources().getString(R.string.detail_setup_cycle));
                 } else if (currentFragment instanceof SetupCycleFragment) {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -99,8 +105,12 @@ public class SetupActivity extends AppCompatActivity implements OnSetupPeriodCyc
 
     @Override
     public void onChangeCalendar(int year, int month, int dayOfMonth) {
-        mCyclePeriod.setBeginDay(dayOfMonth);
-        mCyclePeriod.setBeginMonth(month);
-        mCyclePeriod.setBeginYear(year);
+        DateCyclePeriod date =new DateCyclePeriod();
+        DateCyclePeriod.Date beginDate=date.new Date(dayOfMonth,month,year);
+        date.setBeginDate(beginDate);
+        mCyclePeriod.setDate(date);
+        Log.d("BacNT",""+ dayOfMonth+"/"+month+"/"+year);
     }
+
+
 }

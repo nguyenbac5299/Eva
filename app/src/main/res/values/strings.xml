@@ -5,4 +5,8 @@
     <string name="detail_setup_period">Trung bình giai đoạn kinh nguyệt của bạn kéo dài trong bao lâu?</string>
     <string name="detail_setup_cycle">Trung bình, chu kỳ của bạn dài bao lâu?</string>
     <string name="detail_setup_calendar">Giai đoạn cuối của bạn bắt đầu khi nào?</string>
+    <string name="guess">Dự đoán</string>
+    <string name="period">Giai đoạn</string>
+    <string name="pergant">Thụ thai</string>
+    <string name="ovulation">Rụng trứng</string>
 </resources>

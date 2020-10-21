@@ -25,7 +25,7 @@ import static java.util.Calendar.YEAR;
 
 public class SetupCalendarFragment extends Fragment {
     OnSetupPeriodCycleListener mListener;
-    int year, month, dayOfMonth;
+    int mYear, mMonth, mDayOfMonth;
 
     @Nullable
     @Override
@@ -34,19 +34,21 @@ public class SetupCalendarFragment extends Fragment {
         CalendarView calendarView = view.findViewById(R.id.calendar_view);
 
         Calendar calendar = Calendar.getInstance();
-        year = calendar.get(YEAR);
-        month = calendar.get(MONTH);
-        dayOfMonth = calendar.get(DAY_OF_MONTH);
+        mYear = calendar.get(YEAR);
+        mMonth = calendar.get(MONTH);
+        mDayOfMonth = calendar.get(DAY_OF_MONTH);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                year = year;
-                month = month;
-                dayOfMonth = dayOfMonth;
-                mListener.onChangeCalendar(year, month, dayOfMonth);
+                mYear = year;
+                mMonth = month;
+                mDayOfMonth = dayOfMonth;
+                Log.d("BacNT",dayOfMonth+"/"+month+"/"+year);
+                mListener.onChangeCalendar(mYear, mMonth, mDayOfMonth);
             }
         });
+        mListener.onChangeCalendar(mYear,mMonth,mDayOfMonth);
 
         return view;
     }
