@@ -52,18 +52,20 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_linear"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_above="@+id/linear_menu"
         android:layout_marginBottom="5dp"
         android:background="@color/colorLine" />
+
     <FrameLayout
         android:id="@+id/frame_fragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:layout_above="@+id/linear_menu">
-    </FrameLayout>
+        android:layout_above="@+id/view_linear"
+        android:layout_marginBottom="2dp"
+        android:background="#FFFFFF"></FrameLayout>
 
 
 </RelativeLayout>

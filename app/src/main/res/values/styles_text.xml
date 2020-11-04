@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextListTitle" >
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+    </style>
+    <style name="TextSubTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextPink" >
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorPinkButton</item>
+    </style>
+    <style name="TextNumberPink">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorPinkText</item>
+    </style>
+</resources>

@@ -8,9 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.SetupActivity">
+        android:theme="@style/EvaAppTheme">
+        <activity android:name=".activity.PeriodicRemindActivity"></activity>
+        <activity android:name=".activity.MainDemoActivity" />
+        <activity android:name=".activity.MedicineRemindActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.SetupDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

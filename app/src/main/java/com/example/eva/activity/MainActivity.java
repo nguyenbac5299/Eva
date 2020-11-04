@@ -1,23 +1,26 @@
 package com.example.eva.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.eva.CaculatorDate;
+import com.example.eva.CaculatorCyclePeriod;
+import com.example.eva.CaculatorHomeDate;
 import com.example.eva.model.CyclePeriod;
 import com.example.eva.R;
 import com.example.eva.fragment.CalendarFragment;
 import com.example.eva.fragment.ChartFragment;
 import com.example.eva.fragment.HomeFragment;
 import com.example.eva.fragment.MenuFragment;
-import com.example.eva.model.DateCyclePeriod;
+import com.example.eva.model.PMS;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,13 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ChartFragment mChartFragment;
     CalendarFragment mCalendarFragment;
     MenuFragment mMenuFragment;
-
-
     ImageView mImageHome, mImageCalendar, mImageChart, mImageMenu;
-
 
     int mCycle;
     int mPeriod;
+
+    ActionBar mActionBar;
 
 
 
@@ -42,13 +44,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+
         getData();
+        init();
 
     }
 
 
     private void init() {
+        mActionBar=getSupportActionBar();
+
         mImageHome=findViewById(R.id.image_home);
         mImageCalendar=findViewById(R.id.image_calendar);
         mImageChart=findViewById(R.id.image_chart);
@@ -59,32 +64,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImageChart.setOnClickListener(this);
         mImageMenu.setOnClickListener(this);
 
-
-
         mFragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= mFragmentManager.beginTransaction();
         mHomeFragment = new HomeFragment();
         fragmentTransaction.add(R.id.frame_fragment_main,mHomeFragment,"HOME").commit();
         mImageHome.setImageResource(R.drawable.ic_baseline_home_on_24);
+        mActionBar.setTitle(getResources().getString(R.string.home));
+
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("CYCLEPERIOD",mCyclePeriod);
+        mHomeFragment.setArguments(bundle);
     }
 
     private void getData() {
         Intent intent = getIntent();
         mCyclePeriod = (CyclePeriod) intent.getSerializableExtra("CYCLEPERIOD");
 
-        mCycle = mCyclePeriod.getCycle();
-        mPeriod = mCyclePeriod.getPeriod();
-        Log.d("BacNT","cycle:" +mCycle);
-        Log.d("BacNT","period: "+mPeriod);
-        Log.d("BacNT",mCyclePeriod.getDate().getBeginDate().getDay()+"/"+mCyclePeriod.getDate().getBeginDate().getMonth()+"/"+mCyclePeriod.getDate().getBeginDate().getYear());
-        DateCyclePeriod dateCyclePeriod=new DateCyclePeriod();
-        DateCyclePeriod.Date endDate=dateCyclePeriod.new Date();
-        CaculatorDate caculatorDate=new CaculatorDate(mCyclePeriod);
-        dateCyclePeriod = caculatorDate.countEndDay();
-        mCyclePeriod.setDate(dateCyclePeriod);
-        Log.d("BacNT",mCyclePeriod.getDate().getEndDate().getDay()+"/"+mCyclePeriod.getDate().getEndDate().getMonth()+"/"+mCyclePeriod.getDate().getEndDate().getYear());
-        Log.d("BacNT",mCyclePeriod.getDate().getOvulationDay().getDay()+"/"+mCyclePeriod.getDate().getOvulationDay().getMonth()+"/"+mCyclePeriod.getDate().getOvulationDay().getYear());
-
+        CaculatorCyclePeriod caculatorCyclePeriod=new CaculatorCyclePeriod(mCyclePeriod);
+        mCyclePeriod=CaculatorCyclePeriod.caculatorCyclePeriod();
+        Log.d("BacNT","OK");
     }
 
 
@@ -92,30 +90,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id=v.getId();
         if(id==R.id.image_home){
-
+            Log.d("MainActivity", "clickHome");
+            mActionBar.setTitle(getResources().getString(R.string.home));
             mImageHome.setImageResource(R.drawable.ic_baseline_home_on_24);
             mImageMenu.setImageResource(R.drawable.ic_baseline_menu_off_24);
             mImageChart.setImageResource(R.drawable.ic_baseline_equalizer_off_24);
             mImageCalendar.setImageResource(R.drawable.ic_baseline_calendar_off_24);
 
-            mHomeFragment=new HomeFragment();
-            FragmentTransaction fragmentTransaction=mFragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_fragment_main,mHomeFragment,"HOME").commit();
+            FragmentManager fragmentManager=getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            HomeFragment homeFragment=new HomeFragment();
+            fragmentTransaction.replace(R.id.frame_fragment_main, homeFragment).commit();
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("CYCLEPERIOD",mCyclePeriod);
+            homeFragment.setArguments(bundle);
         }
         if(id==R.id.image_calendar){
 
+            mActionBar.setTitle(getResources().getString(R.string.calendar));
             mImageHome.setImageResource(R.drawable.ic_baseline_home_off_24);
             mImageMenu.setImageResource(R.drawable.ic_baseline_menu_off_24);
             mImageChart.setImageResource(R.drawable.ic_baseline_equalizer_off_24);
             mImageCalendar.setImageResource(R.drawable.ic_baseline_calendar_on_24);
-
+            Log.d("MainActivity", "clickCalendar");
             mCalendarFragment=new CalendarFragment();
             FragmentTransaction fragmentTransaction= mFragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_fragment_main,mCalendarFragment,"CALENDAR").commit();
 
         }
         if(id==R.id.image_chart){
-
+           mActionBar.setTitle(getResources().getString(R.string.chart));
             mImageHome.setImageResource(R.drawable.ic_baseline_home_off_24);
             mImageMenu.setImageResource(R.drawable.ic_baseline_menu_off_24);
             mImageChart.setImageResource(R.drawable.ic_baseline_equalizer_on_24);
@@ -126,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentTransaction.replace(R.id.frame_fragment_main,mChartFragment,"CHART").commit();
         }
         if(id==R.id.image_menu){
-
+            mActionBar.setTitle(getResources().getString(R.string.more));
             mImageHome.setImageResource(R.drawable.ic_baseline_home_off_24);
             mImageMenu.setImageResource(R.drawable.ic_baseline_menu_on_24);
             mImageChart.setImageResource(R.drawable.ic_baseline_equalizer_off_24);

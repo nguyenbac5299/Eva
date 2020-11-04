@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp">
+    <ImageView
+        android:id="@+id/image_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_start_pergant"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"/>
+    <Switch
+        android:layout_centerVertical="true"
+        android:id="@+id/switch_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:theme="@style/AppTheme"/>
+    <TextView
+        android:id="@+id/text_title_remind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/switch_remind"
+        android:layout_toRightOf="@+id/image_remind"
+        android:text="@string/start_fertility_title"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_marginTop="2dp"
+        android:id="@+id/text_content_remind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_title_remind"
+        android:layout_below="@+id/text_title_remind"
+        android:layout_alignRight="@+id/text_title_remind"
+        android:text="@string/start_period_content"
+        android:textSize="13sp"/>
+
+
+</RelativeLayout>

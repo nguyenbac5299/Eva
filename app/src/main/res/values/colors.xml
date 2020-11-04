@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAppTheme">#00000000</color>
+    <color name="colorPrimary">#FFCA4774</color>
+    <color name="colorPrimaryDark">#FFCA4774</color>
+    <color name="colorTheme">#f6889d</color>
     <color name="colorAccent">#FFBF7A91</color>
-    <color name="colorPinkBackground">#FFBF7A91</color>
-    <color name="colorPinkButton">#ff6d88</color>
+    <color name="colorPinkBackground">#88f6889d</color>
+    <color name="colorPinkButton">#f6889d</color>
     <color name="colorDivider">#FFCA4774</color>
     <color name="colorPinkText">#FFB82D5D</color>
     <color name="colorPinkImageButtonOn">#C8F16A7E</color>
     <color name="colorImageButtonOff">#BEB6B2B2</color>
-    <color name="colorLine">#BECCC8C8</color>
+    <color name="colorLine">#BEB6B2B2</color>
     <color name="colorBlueOvulation">#BE1EDADA</color>
+    <color name="colorCircleOvulation">#22a1b0</color>
+    <color name="colorCircleOvulationBlur">#12c5d1</color>
+    <color name="colorCircleNormal">#dfe5f9</color>
+    <color name="colorTextBlack">#D7434141</color>
 </resources>

@@ -6,17 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.eva.R;
 import com.example.eva.callback.OnSetupPeriodCycleListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static java.util.Calendar.DAY_OF_MONTH;
@@ -26,12 +24,15 @@ import static java.util.Calendar.YEAR;
 public class SetupCalendarFragment extends Fragment {
     OnSetupPeriodCycleListener mListener;
     int mYear, mMonth, mDayOfMonth;
+    Button mButtonFinish;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setup_celendar, container, false);
         CalendarView calendarView = view.findViewById(R.id.calendar_view);
+
+        mButtonFinish=view.findViewById(R.id.button_finish);
 
         Calendar calendar = Calendar.getInstance();
         mYear = calendar.get(YEAR);
@@ -48,7 +49,14 @@ public class SetupCalendarFragment extends Fragment {
                 mListener.onChangeCalendar(mYear, mMonth, mDayOfMonth);
             }
         });
-        mListener.onChangeCalendar(mYear,mMonth,mDayOfMonth);
+        mListener.onChangeCalendar(mYear, mMonth, mDayOfMonth);
+
+        mButtonFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onFinishSetup(true);
+            }
+        });
 
         return view;
     }

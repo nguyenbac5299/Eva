@@ -1,12 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/text_demo"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/piechart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_height="match_parent"
+        />
+    <LinearLayout
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/circle_pink_textview">
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Th4, 28 thg 10"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/text_period"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Giai đoạn"
+            />
+        <TextView
+            android:id="@+id/text_numberdate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="Ngày 1"
+            android:gravity="center"
+            android:textSize="35dp"
+            />
+        <TextView
+            android:id="@+id/text_description_period"
+            android:layout_width="120dp"
+            android:layout_gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:lines="2"
+            android:layout_marginBottom="15dp"
+            android:text="Giai đoạn kết thúc vào: "
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/custom_button"
+        />
 
-
-</RelativeLayout>
+</FrameLayout>

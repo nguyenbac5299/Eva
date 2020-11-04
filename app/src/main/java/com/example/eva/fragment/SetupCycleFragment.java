@@ -25,7 +25,7 @@ public class SetupCycleFragment extends Fragment {
         Log.d("Setup", "CycleFragment");
         View view = inflater.inflate(R.layout.fragment_setup_cycle, container, false);
 
-        NumberPicker numberPicker = view.findViewById(R.id.number_picker1);
+        NumberPicker numberPicker = view.findViewById(R.id.number_picker_cycle);
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
