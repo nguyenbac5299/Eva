@@ -29,7 +29,8 @@
         app:np_textColor="@color/colorPinkBackground"
         app:np_value="28"
         tools:ignore="MissingConstraints"
-        android:layout_below="@+id/text_setup_cycle" />
+        android:layout_below="@+id/text_setup_cycle"
+        app:np_wheelItemCount="5"/>
 
 
 </RelativeLayout>

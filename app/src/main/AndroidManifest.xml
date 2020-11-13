@@ -9,16 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/EvaAppTheme">
-        <activity android:name=".activity.PeriodicRemindActivity"></activity>
+        <activity android:name=".activity.PMSActivity"></activity>
+        <activity android:name=".activity.PeriodicRemindActivity" />
         <activity android:name=".activity.MainDemoActivity" />
         <activity android:name=".activity.MedicineRemindActivity" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.SetupDemoActivity">
+        <activity
+            android:name=".activity.SetupDemoActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

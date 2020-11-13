@@ -33,6 +33,7 @@ public class SetupCalendarFragment extends Fragment {
         CalendarView calendarView = view.findViewById(R.id.calendar_view);
 
         mButtonFinish=view.findViewById(R.id.button_finish);
+        mButtonFinish.setVisibility(View.GONE);
 
         Calendar calendar = Calendar.getInstance();
         mYear = calendar.get(YEAR);
@@ -47,6 +48,7 @@ public class SetupCalendarFragment extends Fragment {
                 mDayOfMonth = dayOfMonth;
                 Log.d("BacNT",dayOfMonth+"/"+month+"/"+year);
                 mListener.onChangeCalendar(mYear, mMonth, mDayOfMonth);
+                mButtonFinish.setVisibility(View.VISIBLE);
             }
         });
         mListener.onChangeCalendar(mYear, mMonth, mDayOfMonth);

@@ -1,85 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/linear_note_1"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp">
-        <ImageView
-            android:id="@+id/image_guess"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.savvi.rangedatepicker.CalendarPickerView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_ellipse_guess"/>
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:scrollbarStyle="outsideOverlay"
+            app:tsquare_dividerColor="@color/colorAppTheme"
+            app:tsquare_headerTextColor="@color/colorTextBlack"
+            app:tsquare_orientation_horizontal="true"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"/>
+
+<!--        <com.prolificinteractive.materialcalendarview.MaterialCalendarView-->
+<!--            xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--            android:id="@+id/material_calendar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:mcv_showOtherDates="all"-->
+<!--            app:mcv_selectionColor="@color/colorMainPink"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            app:mcv_arrowColor="@color/colorMainPink"-->
+<!--            app:mcv_selectionMode="range"-->
+<!--            />-->
+        <View
+            android:id="@+id/view_linear1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginVertical="12dp"
+            android:layout_below="@+id/linear_edit_period"
+            android:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/linear_note"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="5dp"
+            android:layout_below="@id/calendar_view">
+            <ImageView
+                android:id="@+id/image_guess"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_ellipse_guess"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="@string/guess" />
+
+            <ImageView
+                android:id="@+id/image_period"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_ellipse__period"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:text="@string/period"/>
+            <ImageView
+                android:id="@+id/image_pregnant"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_ellipse__pregnant"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="@string/period"/>
+            <ImageView
+                android:id="@+id/image_ovulation"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_ovulation"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:text="@string/ovulation"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/view_linear2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginVertical="12dp"
+            android:layout_below="@+id/linear_edit_period"
+            android:background="@color/colorLine" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="10dp">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_mc_length"/>
         <TextView
+            android:id="@+id/text_calendar_period"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/guess"/>
+            android:layout_weight="6"
+            android:text="@string/calendar_text_begin_period"
+            style="@style/TextListTitle"/>
+            <TextView
+                android:id="@+id/button_calendar_yes"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1.3"
+                android:textColor="@color/colorWhite"
+                android:text="@string/yes"
+                android:gravity="center"
+                android:background="@drawable/pink_left_button" />
+            <TextView
+                android:id="@+id/button_calendar_no"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1.3"
+                android:textColor="@color/colorWhite"
+                android:text="@string/no"
+                android:gravity="center"
+                android:background="@drawable/grey_right_button"/>
+
+
+        </LinearLayout>
+        <View
+            android:id="@+id/view_linear3"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginVertical="12dp"
+            android:layout_below="@+id/linear_edit_period"
+            android:background="@color/colorLine" />
 
         <ImageView
-            android:id="@+id/image_period"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_ellipse__period"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:text="@string/period"/>
+            android:id="@+id/image_note"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_add_note"
+            android:layout_below="@id/calendar_view"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear_note_2"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linear_note_1"
-        android:layout_marginTop="5dp">
-        <ImageView
-            android:id="@+id/image_pregnant"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_ellipse__pregnant"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="@string/period"/>
-        <ImageView
-            android:id="@+id/image_ovulation"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_ovulation"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:text="@string/ovulation"/>
-    </LinearLayout>
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_below="@id/linear_note_2"
-        android:id="@+id/material_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="@color/colorPinkButton"
-        android:layout_margin="10dp"
-        app:mcv_arrowColor="@color/colorPinkButton"
-        />
-
-</RelativeLayout>
+</ScrollView>

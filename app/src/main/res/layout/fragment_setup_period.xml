@@ -27,6 +27,7 @@
         app:np_selectedTextColor="@color/colorPinkText"
         app:np_textColor="@color/colorPinkBackground"
         app:np_value="5"
+        app:np_wheelItemCount="5"
         android:layout_below="@+id/text_setup_period"/>
 
 </RelativeLayout>

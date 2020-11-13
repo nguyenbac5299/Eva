@@ -4,17 +4,14 @@ public class PMS {
 
     public static class symptom {
         public static final int GOOD = 0;
-        public static final int CRAMP = 1;// CHUỘT RÚT
-        public static final int ACNE = 2;
-        public static final int STOMACHACHE = 3; //ĐAU BỤNG
-        public static final int HEADACHE = 4; //ĐAU ĐẦU
-        public static final int DIZZINESS = 5; //CHÓNG MẶT
-        public static final int FLATULENCE = 6;// ĐẦY HƠI
-        public static final int BACKACHE = 7;//ĐAU LƯNG
-        public static final int CHESTPAIN = 8; //ĐAU NGỰC
-        public static final int NECKPAIN = 9; //ĐAU CỔ
-        public static final int SHOULDEPAIN = 10; //ĐAU VAI
-        public static final int NAUSE = 11; //BUỒN NÔN
+        public static final int ACNE = 1;
+        public static final int STOMACHACHE = 2; //ĐAU BỤNG
+        public static final int HEADACHE = 3; //ĐAU ĐẦU
+        public static final int DIZZINESS = 4; //CHÓNG MẶT
+        public static final int BLOADTING = 5;// ĐẦY HƠI
+        public static final int BACKACHE = 6;//ĐAU LƯNG
+        public static final int BREAST_PAIN= 7; //ĐAU NGỰC
+        public static final int NAUSEA = 8; //BUỒN NÔN
     }
 
     public static class HealthyState {

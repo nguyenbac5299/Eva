@@ -1,5 +1,6 @@
 package com.example.eva.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,18 +22,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eva.R;
 import com.example.eva.activity.MedicineRemindActivity;
+import com.example.eva.activity.PeriodicRemindActivity;
 import com.example.eva.adapter.RemindAdapter;
+import com.example.eva.callback.OnMenuListener;
 import com.example.eva.model.Remind;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuFragment extends Fragment implements View.OnClickListener {
+public class MenuFragment extends Fragment implements View.OnClickListener, RemindAdapter.OnItemClickListener {
     int mPeriod;
     int mCycle;
     View mView;
     ImageView imageMinusPeriod, imagePlusPeriod, imageMinusCycle, imagePlusCycle;
     LinearLayout linearRemind, linearSettings, linearDetailRemind, linearDetailSetting;
+    TextView mTextPeriod, mTextCycle;
     RelativeLayout layoutMedicine;
     Boolean mStatusVisibleRemind = false;
     Boolean mStatusVisibleSetting = false;
@@ -42,20 +47,32 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     RadioButton radioVietnamese;
     RadioButton radioEnglish;
 
+    OnMenuListener iListener;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_menu, container, false);
-        init();
+
         getData();
+        init();
         return mView;
     }
 
     private void getData() {
+        mCycle = getArguments().getInt("CYCLE");
+        mPeriod = getArguments().getInt("PERIOD");
     }
 
     private void init() {
+
+        mTextPeriod = mView.findViewById(R.id.text_period);
+        mTextCycle = mView.findViewById(R.id.text_cycle);
+
+        mTextPeriod.setText(mPeriod+"");
+        mTextCycle.setText(mCycle+"");
+
         imageMinusCycle = mView.findViewById(R.id.image_minus_cycle);
         imageMinusPeriod = mView.findViewById(R.id.image_minus_period);
         imagePlusCycle = mView.findViewById(R.id.image_plus_cycle);
@@ -88,10 +105,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
         listRemind = new ArrayList<>();
 
-        listRemind.add(new Remind(R.drawable.ic_start_period, getResources().getString(R.string.start_period_title), getResources().getString(R.string.start_period_content), true));
-        listRemind.add(new Remind(R.drawable.ic_end_period, getResources().getString(R.string.end_period_title), getResources().getString(R.string.end_period_content), false));
-        listRemind.add(new Remind(R.drawable.ic_start_pergant, getResources().getString(R.string.start_fertility_title), getResources().getString(R.string.start_fertility_content), false));
-        listRemind.add(new Remind(R.drawable.ic_end_pergant, getResources().getString(R.string.end_fertility_title), getResources().getString(R.string.end_fertility_content), false));
+        listRemind.add(new Remind(R.drawable.ic_mc_start, getResources().getString(R.string.start_period_title), getResources().getString(R.string.start_period_content), true));
+        listRemind.add(new Remind(R.drawable.ic_mc_end, getResources().getString(R.string.end_period_title), getResources().getString(R.string.end_period_content), false));
+        listRemind.add(new Remind(R.drawable.ic_ovulation_start, getResources().getString(R.string.start_fertility_title), getResources().getString(R.string.start_fertility_content), false));
+        listRemind.add(new Remind(R.drawable.ic_ovulation_end, getResources().getString(R.string.end_fertility_title), getResources().getString(R.string.end_fertility_content), false));
         listRemind.add(new Remind(R.drawable.ic_ovulation, getResources().getString(R.string.ovulation), getResources().getString(R.string.ovulation), false));
 
 
@@ -102,7 +119,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        RemindAdapter adapter = new RemindAdapter(listRemind);
+        RemindAdapter adapter = new RemindAdapter(listRemind, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -129,16 +146,24 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_minus_cycle:
-                mCycle--;
+                if (mCycle > 20)
+                    mCycle--;
+                mTextCycle.setText(mCycle + "");
                 break;
             case R.id.image_minus_period:
-                mPeriod--;
+                if (mPeriod > 2)
+                    mPeriod--;
+                mTextPeriod.setText(mPeriod + "");
                 break;
             case R.id.image_plus_cycle:
-                mCycle++;
+                if (mCycle < 36)
+                    mCycle++;
+                mTextCycle.setText(mCycle + "");
                 break;
             case R.id.image_plus_period:
-                mPeriod++;
+                if (mPeriod < 14)
+                    mPeriod++;
+                mTextPeriod.setText(mPeriod + "");
                 break;
             case R.id.linear_remind:
                 visibleDetailRemind();
@@ -177,6 +202,30 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
         } else {
             linearDetailRemind.setVisibility(View.GONE);
+        }
+
+    }
+
+
+    @Override
+    public void OnItemClick(int position) {
+        Intent intent = new Intent(getActivity(), PeriodicRemindActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        iListener.onChangeMenuCycle(mCycle);
+        iListener.onChangeMenuPeriod(mPeriod);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            iListener= (OnMenuListener) context;
+        }catch (ClassCastException e){
 
         }
 

@@ -50,7 +50,7 @@ public class MedicineRemindActivity extends AppCompatActivity implements View.On
         mTextTitle.setTypeface(null, Typeface.BOLD);
         mTextTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         mTextTitle.setGravity(Gravity.CENTER);
-        mTextTitle.setTextColor(getResources().getColor(R.color.colorPinkButton));
+        mTextTitle.setTextColor(getResources().getColor(R.color.colorMainPink));
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(mTextTitle);
 

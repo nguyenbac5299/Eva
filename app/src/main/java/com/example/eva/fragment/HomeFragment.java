@@ -1,15 +1,19 @@
 package com.example.eva.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.eva.CaculatorCyclePeriod;
 import com.example.eva.R;
 import com.example.eva.model.CyclePeriod;
 import com.github.mikephil.charting.animation.Easing;
@@ -18,24 +22,86 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     PieChart pieChart;
     CyclePeriod mCyclePeriod;
+    View mView;
+    LinearLayout mLayoutHome;
+    TextView mTextDate, mTextPeriod,mTextNumberDate,mTextDescription;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mCyclePeriod= (CyclePeriod) getArguments().getSerializable("CYCLEPERIOD");
 
-        String dateCurrent="";
+        showPieChart();
+        showTextView();
 
-        pieChart=view.findViewById(R.id.piechart);
+        return mView;
+
+    }
+
+    private void showTextView() {
+        mLayoutHome=mView.findViewById(R.id.layout_home);
+        mTextDate=mView.findViewById(R.id.text_date);
+        mTextPeriod=mView.findViewById(R.id.text_period);
+        mTextNumberDate=mView.findViewById(R.id.text_number_date);
+        mTextDescription=mView.findViewById(R.id.text_description_period);
+        int state=CaculatorCyclePeriod.getStage(mCyclePeriod);
+        mTextDate.setText(CaculatorCyclePeriod.getCurrentDateHome());
+
+        if(state==CaculatorCyclePeriod.IN_PERIOD){
+            mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_pink_textview));
+            setTextColor(false);
+            return;
+        }
+        if(state==CaculatorCyclePeriod.IN_FIRST_NORMAL){
+            mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_normal_textview));
+            setTextColor(true);
+            return;
+        }
+        if(state==CaculatorCyclePeriod.IN_OVULATION){
+            mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_ovulation_blur_textview));
+            setTextColor(false);
+
+        }
+        if(state==CaculatorCyclePeriod.IS_OVULATION){
+            mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_ovulation_textview));
+            setTextColor(false);
+            return;
+        }
+        if(state==CaculatorCyclePeriod.IN_SECOND_NORMAL){
+            mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_normal_textview));
+            setTextColor(true);
+
+            return;
+        }
+
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void setTextColor(boolean isNormal){
+        if(!isNormal){
+            mTextDate.setTextColor(R.color.colorWhite);
+            mTextPeriod.setTextColor(R.color.colorWhite);
+            mTextNumberDate.setTextColor(R.color.colorWhite);
+            mTextDescription.setTextColor(R.color.colorWhite);
+        }
+        else {
+            mTextDate.setTextColor(R.color.colorBlueText);
+            mTextPeriod.setTextColor(R.color.colorBlueText);
+            mTextNumberDate.setTextColor(R.color.colorBlueText);
+            mTextDescription.setTextColor(R.color.colorBlueText);
+        }
+    }
+
+    private void showPieChart(){
+        pieChart=mView.findViewById(R.id.piechart);
         pieChart.getDescription().setEnabled(false);
         pieChart.setRotationEnabled(false);
         pieChart.setExtraOffsets(10,10,10,10);
@@ -48,12 +114,12 @@ public class HomeFragment extends Fragment {
         pieChart.setTransparentCircleRadius(80f);
 
         ArrayList<PieEntry> yValues=new ArrayList<>();
-        yValues.add(new PieEntry(5));
-        yValues.add(new PieEntry(7));
-        yValues.add(new PieEntry(5));
+        yValues.add(new PieEntry(mCyclePeriod.getPeriod()));
+        yValues.add(new PieEntry(CaculatorCyclePeriod.countFirstNormalDay(mCyclePeriod)));
+        yValues.add(new PieEntry(CaculatorCyclePeriod.countFirstFertility(mCyclePeriod)));
         yValues.add(new PieEntry(1));
-        yValues.add(new PieEntry(5));
-        yValues.add(new PieEntry(9));
+        yValues.add(new PieEntry(CaculatorCyclePeriod.countSecondFertility(mCyclePeriod)));
+        yValues.add(new PieEntry(CaculatorCyclePeriod.countSecondNormal(mCyclePeriod)));
 
         pieChart.animateY(1000, Easing.EaseInCubic);
 
@@ -63,7 +129,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Integer> colors=new ArrayList<>();
 
-        colors.add(getResources().getColor(R.color.colorPinkButton));
+        colors.add(getResources().getColor(R.color.colorMainPink));
         colors.add(getResources().getColor(R.color.colorCircleNormal));
         colors.add(getResources().getColor(R.color.colorCircleOvulationBlur));
         colors.add(getResources().getColor(R.color.colorCircleOvulation));
@@ -79,6 +145,6 @@ public class HomeFragment extends Fragment {
 
         pieChart.setData(data);
         pieChart.invalidate();
-        return view;
     }
+
 }

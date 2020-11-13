@@ -1,11 +1,10 @@
 package com.example.eva.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -16,9 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.eva.CaculatorCyclePeriod;
 import com.example.eva.R;
 import com.example.eva.adapter.SetupViewPagerAdapter;
 import com.example.eva.callback.OnSetupPeriodCycleListener;
+import com.example.eva.data.DBManager;
 import com.example.eva.model.CyclePeriod;
 import com.google.android.material.tabs.TabLayout;
 
@@ -30,7 +31,12 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
     TabLayout mTabLayout;
     ViewPager mViewPager;
     CyclePeriod mCyclePeriod;
-
+    public static final String SHARED_PREFERENCES="SharedPreferences";
+    public static final String FIRST_TIME="FirstTimeInstall";
+    DBManager dbManager;
+    int mCycle;
+    int mPeriod;
+    SharedPreferences sharedPreferences;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -38,6 +44,18 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_demo);
 
+        sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        String FirstTime=sharedPreferences.getString(FIRST_TIME,"");
+
+        if(FirstTime.equals("Yes")){
+            Intent intent=new Intent(this, MainDemoActivity.class);
+ //           intent.putExtra("CYCLEPERIOD", mCyclePeriod);
+            startActivity(intent);
+        }
+
+
+
+        dbManager=new DBManager(this);
 
         TextView textView = new TextView(this);
         textView.setText(getResources().getString(R.string.app_name));
@@ -45,7 +63,7 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
         textView.setTypeface(null, Typeface.BOLD);
         textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(getResources().getColor(R.color.colorPinkButton));
+        textView.setTextColor(getResources().getColor(R.color.colorMainPink));
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
 
@@ -57,19 +75,20 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
 
         SetupViewPagerAdapter setupViewPagerAdapter=new SetupViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mViewPager.setAdapter(setupViewPagerAdapter);
-
         mTabLayout.setupWithViewPager(mViewPager);
 
     }
 
     @Override
     public void onChangeCycle(int cycle) {
-        mCyclePeriod.setCycle(cycle);
+        mCycle=cycle;
+        mCyclePeriod.setCycle(mCycle);
     }
 
     @Override
     public void onChangePeriod(int period) {
-        mCyclePeriod.setPeriod(period);
+        mPeriod=period;
+        mCyclePeriod.setPeriod(mPeriod);
     }
 
     @Override
@@ -85,8 +104,30 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
     @Override
     public void onFinishSetup(boolean status) {
         if(status){
+            //Tinh toan ngay
+            //CaculatorCyclePeriod caculatorCyclePeriod=new CaculatorCyclePeriod(mCyclePeriod);
+            mCyclePeriod.setUserBeginDate(mCyclePeriod.getBeginDate());
+            mCyclePeriod.setUserPeriod(mPeriod);
+            mCyclePeriod.setUserCycle(mCycle);
+            mCyclePeriod=CaculatorCyclePeriod.caculatorCyclePeriod(mCyclePeriod);
+            dbManager.addCyclePeriod(mCyclePeriod);
+
+            CyclePeriod nextCyclePeriod=new CyclePeriod(mCycle, mPeriod,mCyclePeriod.getNextBeginCycle());
+            nextCyclePeriod=CaculatorCyclePeriod.caculatorCyclePeriod(nextCyclePeriod);
+            dbManager.addCyclePeriod(nextCyclePeriod);
+
+
+            CyclePeriod nextNextCyclePeriod=new CyclePeriod(mCycle, mPeriod,nextCyclePeriod.getNextBeginCycle());
+            nextNextCyclePeriod=CaculatorCyclePeriod.caculatorCyclePeriod(nextNextCyclePeriod);
+            dbManager.addCyclePeriod(nextNextCyclePeriod);
+
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putString(FIRST_TIME,"Yes");
+            editor.apply();
+
             Intent intent=new Intent(this, MainDemoActivity.class);
-            intent.putExtra("CYCLEPERIOD", mCyclePeriod);
+            intent.putExtra("CYCLE", mCycle);
+            intent.putExtra("PERIOD", mPeriod);
             startActivity(intent);
         }
     }

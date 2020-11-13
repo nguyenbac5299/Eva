@@ -1,18 +1,73 @@
 package com.example.eva.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 public class CyclePeriod implements Serializable {
+    private int id;
     private int cycle=28;
     private int period=5;
     private int month;
     private String beginDate;
     private String endDate;
-    private String beginOvulation;
-    private String endOvulation;
+    private String userBeginDate;
+    private String userEndDate;
+    private int userCycle;
+    private int userPeriod;
+
+
+    public void setUserCycle(int userCycle) {
+        this.userCycle = userCycle;
+    }
+
+    public void setUserPeriod(int userPeriod) {
+        this.userPeriod = userPeriod;
+    }
+
+    public int getUserCycle() {
+        return userCycle;
+    }
+
+    public int getUserPeriod() {
+        return userPeriod;
+    }
+
+    public String getUserBeginDate() {
+        return userBeginDate;
+    }
+
+    public String getUserEndDate() {
+        return userEndDate;
+    }
+
+    public void setUserBeginDate(String userBeginDate) {
+        this.userBeginDate = userBeginDate;
+    }
+
+    public void setUserEndDate(String userEndDate) {
+        this.userEndDate = userEndDate;
+    }
+
+    private String beginFertility;
+    private String endFertility;
     private String ovulationDate;
     private PMS expression;
+    private String nextBeginCycle;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNextBeginCycle(String nextBeginCycle) {
+        this.nextBeginCycle = nextBeginCycle;
+    }
+
+    public String getNextBeginCycle() {
+        return nextBeginCycle;
+    }
 
     public PMS getExpression() {
         return expression;
@@ -41,6 +96,12 @@ public class CyclePeriod implements Serializable {
     public CyclePeriod() {
     }
 
+    public CyclePeriod(int cycle, int period, String beginDate) {
+        this.cycle = cycle;
+        this.period = period;
+        this.beginDate = beginDate;
+    }
+
     public int getMonth() {
         return month;
     }
@@ -49,20 +110,20 @@ public class CyclePeriod implements Serializable {
         this.month = month;
     }
 
-    public String getBeginOvulation() {
-        return beginOvulation;
+    public String getBeginFertility() {
+        return beginFertility;
     }
 
-    public void setBeginOvulation(String beginOvulation) {
-        this.beginOvulation = beginOvulation;
+    public void setBeginFertility(String beginFertiity) {
+        this.beginFertility = beginFertiity;
     }
 
-    public void setEndOvulation(String endOvulation) {
-        this.endOvulation = endOvulation;
+    public void setEndFertility(String endFertility) {
+        this.endFertility = endFertility;
     }
 
-    public String getEndOvulation() {
-        return endOvulation;
+    public String getEndFertility() {
+        return endFertility;
     }
 
     public String getBeginDate() {

@@ -2,7 +2,6 @@ package com.example.eva.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -12,13 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eva.CaculatorCyclePeriod;
 import com.example.eva.R;
 import com.example.eva.adapter.MainViewPagerAdapter;
+import com.example.eva.callback.OnMenuListener;
+import com.example.eva.data.DBManager;
 import com.example.eva.fragment.CalendarFragment;
 import com.example.eva.fragment.ChartFragment;
 import com.example.eva.fragment.HomeFragment;
@@ -26,21 +26,25 @@ import com.example.eva.fragment.MenuFragment;
 import com.example.eva.model.CyclePeriod;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainDemoActivity extends AppCompatActivity {
+public class MainDemoActivity extends AppCompatActivity implements OnMenuListener {
 
     CyclePeriod mCyclePeriod;
 
 //    FragmentManager mFragmentManager;
-//    HomeFragment mHomeFragment;
-//    ChartFragment mChartFragment;
-//    CalendarFragment mCalendarFragment;
-//    MenuFragment mMenuFragment;
+    HomeFragment mHomeFragment;
+    ChartFragment mChartFragment;
+    CalendarFragment mCalendarFragment;
+    MenuFragment mMenuFragment;
 //    ImageView mImageHome, mImageCalendar, mImageChart, mImageMenu;
 
     ActionBar mActionBar;
     TabLayout mTabMain;
     ViewPager mViewPagerMain;
     TextView mTextTitle;
+
+    int mCycle;
+    int mPeriod;
+    //DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,44 +72,45 @@ public class MainDemoActivity extends AppCompatActivity {
         mTextTitle.setTypeface(null, Typeface.BOLD);
         mTextTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         mTextTitle.setGravity(Gravity.CENTER);
-        mTextTitle.setTextColor(getResources().getColor(R.color.colorPinkButton));
+        mTextTitle.setTextColor(getResources().getColor(R.color.colorMainPink));
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(mTextTitle);
 
     }
     private void getData() {
-        Intent intent = getIntent();
-        mCyclePeriod = (CyclePeriod) intent.getSerializableExtra("CYCLEPERIOD");
 
-        CaculatorCyclePeriod caculatorCyclePeriod=new CaculatorCyclePeriod(mCyclePeriod);
-        mCyclePeriod=CaculatorCyclePeriod.caculatorCyclePeriod();
-        Log.d("BacNT","OK");
+        DBManager dbManager=new DBManager(this);
+        mCyclePeriod= dbManager.getCurrentCycle();
+
+        mPeriod=mCyclePeriod.getPeriod();
+        mCycle=mCyclePeriod.getCycle();
+
     }
     private void setupTabIcons() {
 
         TextView tabHome = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_main_tab, null);
         tabHome.setText(getResources().getString(R.string.home));
-        tabHome.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_home_on_24, 0, 0);
+        tabHome.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_home_pressed, 0, 0);
         mTabMain.getTabAt(0).setCustomView(tabHome);
 
         TextView tabCalendar = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_main_tab, null);
         tabCalendar.setText(getResources().getString(R.string.calendar));
-        tabCalendar.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_calendar_on_24, 0, 0);
+        tabCalendar.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_calendar_pressed, 0, 0);
         mTabMain.getTabAt(1).setCustomView(tabCalendar);
 
         TextView tabChart = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_main_tab, null);
         tabChart.setText(getResources().getString(R.string.chart));
-        tabChart.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_equalizer_on_24, 0, 0);
+        tabChart.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_report_pressed, 0, 0);
         mTabMain.getTabAt(2).setCustomView(tabChart);
 
         TextView tabMore = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_main_tab, null);
         tabMore.setText(getResources().getString(R.string.more));
-        tabMore.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_menu_on_24, 0, 0);
+        tabMore.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_more_pressed, 0, 0);
         mTabMain.getTabAt(3).setCustomView(tabMore);
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,mCyclePeriod);
+        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,mCyclePeriod, mCycle, mPeriod);
         adapter.addFrag(new HomeFragment(),getResources().getString(R.string.home) );
         adapter.addFrag(new CalendarFragment(), getResources().getString(R.string.calendar));
         adapter.addFrag(new ChartFragment(),getResources().getString(R.string.chart) );
@@ -145,5 +150,17 @@ public class MainDemoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onChangeMenuCycle(int cycle) {
+        mCycle=cycle;
+        Log.d("MainDemoActivity","change"+ mCycle);
+    }
+
+    @Override
+    public void onChangeMenuPeriod(int period) {
+        mPeriod=period;
+        Log.d("MainDemoActivity","change"+ mPeriod);
     }
 }

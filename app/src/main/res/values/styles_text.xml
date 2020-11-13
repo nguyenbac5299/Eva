@@ -9,12 +9,28 @@
         <item name="android:textColor">@color/colorTextBlack</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="TextChartTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="TextChartSubTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:gravity">center</item>
+    </style>
     <style name="TextPink" >
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@color/colorPinkButton</item>
+        <item name="android:textColor">@color/colorMainPink</item>
     </style>
     <style name="TextNumberPink">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/colorPinkText</item>
+    </style>
+    <style name="TextHealthy">
+        <item name="android:background">@drawable/circle_healthy_background</item>
+        <item name="android:textColor">@color/colorMainPink</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

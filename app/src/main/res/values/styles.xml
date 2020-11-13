@@ -10,9 +10,9 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_24</item>
     </style>
     <style name="TimePickerTheme" parent="@android:style/Widget.DeviceDefault.DatePicker">
-        <item name="android:divider">@color/colorPinkButton</item>
-        <item name="android:numbersTextColor">@color/colorPinkButton</item>
-        <item name="android:textColor">@color/colorPinkButton</item>
+        <item name="android:divider">@color/colorMainPink</item>
+        <item name="android:numbersTextColor">@color/colorMainPink</item>
+        <item name="android:textColor">@color/colorMainPink</item>
     </style>
 
 </resources>

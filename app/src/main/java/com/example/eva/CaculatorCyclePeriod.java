@@ -9,33 +9,38 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class CaculatorCyclePeriod {
-   public static final int EQUAL = 1;
+public class
+CaculatorCyclePeriod {
+    public static final int EQUAL = 1;
     public static final int BEFORE = 2;
     public static final int APTER = 3;
 
-    public static final int INPERIOD = 4;
-    public static final int INFIRSTNORMAL = 5;
-    public static final int INOVULATION = 6;
-    public static final int ISOVULATION = 7;
-    public static final int INSECONDNORMAL = 8;
+    public static final int IN_PERIOD = 4;
+    public static final int IN_FIRST_NORMAL = 5;
+    public static final int IN_OVULATION = 6;
+    public static final int IS_OVULATION = 7;
+    public static final int IN_SECOND_NORMAL = 8;
+    public static final int IN_NEXT_CYCLE = 9;
 
-    static CyclePeriod mCyclePeriod;
+    //static CyclePeriod cyclePeriod;
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    public CaculatorCyclePeriod(CyclePeriod cyclePeriod) {
-        this.mCyclePeriod = cyclePeriod;
-    }
+//    public CaculatorCyclePeriod(CyclePeriod cyclePeriod) {
+//        this.cyclePeriod = cyclePeriod;
+//    }
 
-    public static String caculatorEndDate() {
-        return caculatorDate(mCyclePeriod.getBeginDate(), mCyclePeriod.getPeriod() - 1);
+    public static String caculatorEndDate(CyclePeriod cyclePeriod) {
+        return caculatorDate(cyclePeriod.getBeginDate(), cyclePeriod.getPeriod() - 1);
     }
 
     public static String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
+        return sdf.format(calendar.getTime());
+    }
 
-        Log.d("MainActivity", "" + simpleDateFormat.format(calendar.getTime()));
+    public static String getCurrentDateHome() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
         return simpleDateFormat.format(calendar.getTime());
     }
 
@@ -48,23 +53,33 @@ public class CaculatorCyclePeriod {
             return APTER;
     }
 
-    public static int getStage() {
+    public static int getStage(CyclePeriod cyclePeriod) {
         Date currentDate = Date.valueOf(getCurrentDate());
-        Date beginDate = Date.valueOf(mCyclePeriod.getBeginDate());
-        Date endDate = Date.valueOf(mCyclePeriod.getEndDate());
-        Date ovulaytionDate = Date.valueOf(mCyclePeriod.getOvulationDate());
-        Date beginOvulationDate = Date.valueOf(mCyclePeriod.getBeginOvulation());
-        Date endOvulationDate = Date.valueOf(mCyclePeriod.getEndOvulation());
+        Date beginDate = Date.valueOf(cyclePeriod.getBeginDate());
+        Date endDate = Date.valueOf(cyclePeriod.getEndDate());
+        Date ovulationDate = Date.valueOf(cyclePeriod.getOvulationDate());
+        Date beginFertilityDate = Date.valueOf(cyclePeriod.getBeginFertility());
+        Date endFertilityDate = Date.valueOf(cyclePeriod.getEndFertility());
+        Date nextBeginCycleDate = Date.valueOf(cyclePeriod.getNextBeginCycle());
         if (inPeriod(currentDate, beginDate, endDate))
-            return INPERIOD;
-        else if (isOvulation(currentDate, ovulaytionDate))
-            return ISOVULATION;
-        else if (inOvulation(currentDate, beginOvulationDate, endOvulationDate))
-            return INOVULATION;
-        else if (inFirstNormal(currentDate, endDate, beginOvulationDate))
-            return INFIRSTNORMAL;
-        else
-            return INSECONDNORMAL;
+            return IN_PERIOD;
+        else if (isOvulation(currentDate, ovulationDate))
+            return IS_OVULATION;
+        else if (inFertility(currentDate, beginFertilityDate, endFertilityDate))
+            return IN_OVULATION;
+        else if (inFirstNormal(currentDate, endDate, beginFertilityDate))
+            return IN_FIRST_NORMAL;
+        else if (inSecondNormal(currentDate, endFertilityDate, nextBeginCycleDate))
+            return IN_SECOND_NORMAL;
+        else return IN_NEXT_CYCLE;
+    }
+
+    public static boolean inSecondNormal(Date currentDate, Date endFertilityDate, Date nextBeginCycleDate) {
+        int begin = compareDate(currentDate, endFertilityDate);
+        int end = compareDate(currentDate, nextBeginCycleDate);
+        if (begin == APTER && end == BEFORE)
+            return true;
+        return false;
     }
 
     public static boolean inPeriod(Date currentDate, Date beginDate, Date endDate) {
@@ -75,14 +90,50 @@ public class CaculatorCyclePeriod {
         else return false;
     }
 
-    public static long countPeriodDay(){
+    public static boolean inCycle(CyclePeriod cyclePeriod) {
+        Date beginDate = Date.valueOf(cyclePeriod.getBeginDate());
+        Date beginNextDate = Date.valueOf(cyclePeriod.getNextBeginCycle());
         Date currentDate = Date.valueOf(getCurrentDate());
-        Date beginDate = Date.valueOf(mCyclePeriod.getBeginDate());
+        int begin = compareDate(currentDate, beginDate);
+        int end = compareDate(currentDate, beginNextDate);
+        if (begin == EQUAL || (begin == APTER && end == BEFORE))
+            return true;
+        else
+            return false;
+
+    }
+
+    public static long countPeriodDay(CyclePeriod cyclePeriod) {
+        Date currentDate = Date.valueOf(getCurrentDate());
+        Date beginDate = Date.valueOf(cyclePeriod.getBeginDate());
         return countDay(currentDate, beginDate);
     }
-//    public static long countOvulation(){
-//
-//    }
+
+
+    public static long countFirstNormalDay(CyclePeriod cyclePeriod) {
+        Date endDate = Date.valueOf(cyclePeriod.getEndDate());
+        Date beginFertility = Date.valueOf(caculatorDate(cyclePeriod.getBeginFertility(), -1));
+        return countDay(beginFertility, endDate);
+    }
+
+    public static long countFirstFertility(CyclePeriod cyclePeriod) {
+        Date beginFertility = Date.valueOf(cyclePeriod.getBeginFertility());
+        Date ovulationDate = Date.valueOf(cyclePeriod.getOvulationDate());
+        return countDay(ovulationDate, beginFertility);
+    }
+
+    public static long countSecondFertility(CyclePeriod cyclePeriod) {
+        Date ovulationDate = Date.valueOf(cyclePeriod.getOvulationDate());
+        Date endFertility = Date.valueOf(cyclePeriod.getEndFertility());
+        return countDay(endFertility, ovulationDate);
+    }
+
+    public static long countSecondNormal(CyclePeriod cyclePeriod) {
+        Date nextCycle = Date.valueOf(cyclePeriod.getNextBeginCycle());
+        Date endFertility = Date.valueOf(cyclePeriod.getEndFertility());
+        return countDay(nextCycle, endFertility);
+    }
+
 
     private static long countDay(Date date1, Date date2) {
         Calendar calendar1 = Calendar.getInstance();
@@ -103,7 +154,7 @@ public class CaculatorCyclePeriod {
 
     }
 
-    public static boolean inOvulation(Date curentDate, Date beginOvulationDate, Date endOvulationDate) {
+    public static boolean inFertility(Date curentDate, Date beginOvulationDate, Date endOvulationDate) {
         int begin = compareDate(curentDate, beginOvulationDate);
         int end = compareDate(curentDate, endOvulationDate);
         if (begin == EQUAL || end == EQUAL || (begin == APTER && end == BEFORE))
@@ -118,17 +169,23 @@ public class CaculatorCyclePeriod {
             return false;
     }
 
-
-    public static String caculatorOvulationDate() {
-        return caculatorDate(mCyclePeriod.getBeginDate(), mCyclePeriod.getCycle() - 14);
+    public static String caculatorBeginNextCycle(CyclePeriod cyclePeriod) {
+        if (cyclePeriod.getUserBeginDate() == null || cyclePeriod.getUserBeginDate().equals(""))
+            return caculatorDate(cyclePeriod.getBeginDate(), cyclePeriod.getCycle());
+        else
+            return caculatorDate(cyclePeriod.getUserBeginDate(), cyclePeriod.getCycle());
     }
 
-    public static String caculatorBeginOvulation() {
-        return caculatorDate(mCyclePeriod.getOvulationDate(), -4);
+    public static String caculatorOvulationDate(CyclePeriod cyclePeriod) {
+        return caculatorDate(cyclePeriod.getBeginDate(), cyclePeriod.getCycle() - 14);
     }
 
-    public static String caculatorEndOvulation() {
-        return caculatorDate(mCyclePeriod.getOvulationDate(), 4);
+    public static String caculatorBeginFertility(CyclePeriod cyclePeriod) {
+        return caculatorDate(cyclePeriod.getOvulationDate(), -5);
+    }
+
+    public static String caculatorEndFertility(CyclePeriod cyclePeriod) {
+        return caculatorDate(cyclePeriod.getOvulationDate(), 5);
     }
 
     private static String caculatorDate(String date, int addDay) {
@@ -142,29 +199,40 @@ public class CaculatorCyclePeriod {
         return sdf.format(calendar.getTime());
     }
 
-    public static CyclePeriod caculatorCyclePeriod() {
-        CyclePeriod cyclePeriod = mCyclePeriod;
-        cyclePeriod.setEndDate(caculatorEndDate());
-        cyclePeriod.setOvulationDate(caculatorOvulationDate());
-        cyclePeriod.setBeginOvulation(caculatorBeginOvulation());
-        cyclePeriod.setEndOvulation(caculatorEndOvulation());
-        cyclePeriod.setMonth(caculatorMonth());
+    public static CyclePeriod caculatorCyclePeriod(CyclePeriod cyclePeriod) {
+        cyclePeriod.setEndDate(caculatorEndDate(cyclePeriod));
+        cyclePeriod.setOvulationDate(caculatorOvulationDate(cyclePeriod));
+        cyclePeriod.setBeginFertility(caculatorBeginFertility(cyclePeriod));
+        cyclePeriod.setEndFertility(caculatorEndFertility(cyclePeriod));
+        cyclePeriod.setMonth(caculatorMonth(cyclePeriod));
+        cyclePeriod.setNextBeginCycle(caculatorBeginNextCycle(cyclePeriod));
         return cyclePeriod;
     }
 
-    public static String getNextBeginDate() {
-        return caculatorDate(mCyclePeriod.getBeginDate(), mCyclePeriod.getCycle());
-    }
-    public static int caculatorMonth() {
+    public static int getCurrentMonth() {
         int month;
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
         try {
-            calendar.setTime(sdf.parse(mCyclePeriod.getBeginDate()));
+            calendar.setTime(sdf.parse(getCurrentDate()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        month=Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
+        month = Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
+        return month;
+    }
+
+
+    public static int caculatorMonth(CyclePeriod cyclePeriod) {
+        int month;
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
+        try {
+            calendar.setTime(sdf.parse(cyclePeriod.getBeginDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        month = Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
         return month;
     }
 

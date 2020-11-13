@@ -52,9 +52,61 @@
     <string name="date_remind_in_day">Nhắc nhở vào đúng ngày</string>
     <string name="remind_message">Kỳ hành kinh dự tính của bạn sẽ bắt đầu </string>
     <string name="remind_message_begin_period">Kỳ hành kinh của bạn dự tính sẽ bắt đầu vào ngày </string>
-    <string name="remind_message_end_period">Kỳ hành kinh của bạn dự tính sẽ bắt đầu vào ngày </string>
-    <string name="remind_message_begin_fertility">Kỳ hành kinh của bạn dự tính sẽ bắt đầu vào ngày </string>
-    <string name="remind_message_end_fertility">Kỳ hành kinh của bạn dự tính sẽ bắt đầu vào ngày </string>
-    <string name="remind_message_ovulation">Kỳ hành kinh của bạn dự tính sẽ bắt đầu vào ngày </string>
+    <string name="remind_message_end_period">Đừng quên ghi lại ngày cuối giai đoạn của bạn </string>
+    <string name="remind_message_begin_fertility">Cửa sổ thụ thai dự tính sẽ bắt đầu vào ngày </string>
+    <string name="remind_message_end_fertility">Cửa sổ thụ thai dự tính sẽ kết thúc vào ngày </string>
+    <string name="remind_message_ovulation">Kỳ rụng trứng dự tính sẽ bắt đầu vào ngày </string>
+    
+    <string name="mood">Cảm xúc</string>
+    <string name="menstruation">Hành kinh</string>
+    <string name="medicine">Thuốc</string>
+    <string name="sporty">Hoạt động thể chất</string>
+    <string name="symptom">Triệu chứng</string>
+    <string name="healthy">Tình trạng sức khỏe</string>
+    <string name="note">Ghi chú</string>
+    <string name="edit_options">Tùy chọn</string>
+
+    <string name="menstruation_light">Nhẹ</string>
+    <string name="menstruation_medium">Trung bình</string>
+    <string name="menstruation_heavy">Nặng</string>
+    <string name="mood_normal">Bình thường</string>
+    <string name="mood_happy">Hạnh phúc</string>
+    <string name="mood_sad">Buồn</string>
+    <string name="mood_angry">Giận dữ</string>
+    <string name="mood_tired">Mệt mỏi</string>
+    <string name="mood_worry">Lo lắng</string>
+    <string name="mood_fear">Lo sợ</string>
+    <string name="symptom_headache">Đau đầu</string>
+    <string name="symptom_good">Mọi thứ đều ổn</string>
+    <string name="symptom_acne">Mụn</string>
+    <string name="symptom_dizziness">Chóng mặt</string>
+    <string name="symptom_bloating">Đầy hơi</string>
+    <string name="symptom_stomachache">Đau bụng</string>
+    <string name="symptom_nausea">Buồn nôn</string>
+    <string name="symptom_backache">Đau lưng</string>
+    <string name="symptom_breast_pain">Đau ngực</string>
+    <string name="weight">Cân nặng</string>
+    <string name="temperature">Nhiệt độ</string>
+    <string name="no_sporty">Không tập thể thao</string>
+    <string name="running">Chạy</string>
+    <string name="cycling">Đi xe</string>
+    <string name="gym">Gym</string>
+    <string name="earobics">Thể dục nhịp điệu</string>
+    <string name="swimming">Bơi</string>
+    <string name="calendar_text_begin_period">Giai đoạn bắt đầu </string>
+    <string name="calendar_text_end_period">Giai đoạn kết thúc </string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+
+
+
+
+
+
+
+
+
+
+
 
 </resources>

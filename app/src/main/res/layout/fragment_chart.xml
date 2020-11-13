@@ -1,8 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2BA8B8">
+    android:orientation="vertical"
+    android:layout_margin="5dp">
+    <TextView
+        android:id="@+id/text_guess"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/guess"
+        style="@style/TextChartTitle"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:orientation="horizontal"
+       android:layout_weight="3">
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:orientation="vertical"
+           android:gravity="center">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/menu_period"
+               style="@style/TextChartSubTitle"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="5 ngày" />
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:orientation="vertical"
+           android:gravity="center">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/menu_cycle"
+               style="@style/TextChartSubTitle"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="28 ngày" />
+       </LinearLayout>
+   </LinearLayout>
+    <View
+        android:id="@+id/view_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:layout_below="@+id/linear_edit_period"
+        android:background="@color/colorBigLine" />
 
+    <TextView
+        android:id="@+id/text_chart_date"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="1/1 -2/2"
+        style="@style/TextChartTitle"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="3">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_period_title"
+                style="@style/TextChartSubTitle"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sớm 5 ngày" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_period"
+                style="@style/TextChartSubTitle"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ổn định" />
+        </LinearLayout>
+    </LinearLayout>
 
-</RelativeLayout>
+    <View
+        android:id="@+id/view_linear2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:layout_below="@+id/linear_edit_period"
+        android:background="@color/colorBigLine" />
+    <TextView
+        android:id="@+id/text_time_period"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/menu_cycle"
+        style="@style/TextChartTitle"/>
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart_cycle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"/>
+
+    <View
+        android:id="@+id/view_linear3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:layout_below="@+id/linear_edit_period"
+        android:background="@color/colorBigLine" />
+    <TextView
+        android:id="@+id/text_time_cycle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/menu_period"
+        style="@style/TextChartTitle"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart_period"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"/>
+
+</LinearLayout>
