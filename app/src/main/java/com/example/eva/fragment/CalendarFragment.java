@@ -40,9 +40,6 @@ public class CalendarFragment extends Fragment {
 
         calendarPickerView=view.findViewById(R.id.calendar_view);
 
-
-
-
         final Calendar nextYear = Calendar.getInstance();
         nextYear.add(Calendar.YEAR, 10);
 
