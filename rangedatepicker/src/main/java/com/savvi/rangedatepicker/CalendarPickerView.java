@@ -8,7 +8,9 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,7 +45,8 @@ import static java.util.Calendar.YEAR;
 
 public class CalendarPickerView extends RecyclerView {
     private ArrayList<SubTitle> subTitles;
-
+    private OnClickOKListener mOnClickOKListener;
+    MonthCellDescriptor mCell;
     public enum SelectionMode {
         /**
          * Only one date will be selectable.  If there is already a selected date and you select a new
@@ -162,6 +165,7 @@ public class CalendarPickerView extends RecyclerView {
                     .withSelectedDate(new Date());
         }
     }
+
 
     /**
      * Both date parameters must be non-null and their {@link Date#getTime()} must not return 0. Time
@@ -521,8 +525,24 @@ public class CalendarPickerView extends RecyclerView {
     private class CellClickedListener implements MonthView.Listener {
         @Override
         public void handleClick(MonthCellDescriptor cell) {
+            mCell=cell;
+            demo(cell);
+        }
+
+        @Override
+        public void clickButtonYes(boolean yes) {
+            Log.d("BacNT","click yes: " + yes);
+        }
+
+        @Override
+        public void clickButtonNo(boolean yes) {
+            Log.d("BacNT","click no: " + yes);
+        }
+
+        private void demo(MonthCellDescriptor cell) {
             Date clickedDate = cell.getDate();
 
+            //BacNT: demo
             if (highlightedCells.contains(cell)) {
                 return;
             }
@@ -554,6 +574,9 @@ public class CalendarPickerView extends RecyclerView {
                 }
             }
         }
+
+        //BacNT: demo
+
     }
 
 
@@ -589,6 +612,7 @@ public class CalendarPickerView extends RecyclerView {
     }
 
     private boolean doSelectDate(Date date, MonthCellDescriptor cell) {
+        Log.d("BacNT", "doSelectDate");
         Calendar newlySelectedCal = Calendar.getInstance(timeZone, locale);
         newlySelectedCal.setTime(date);
         // Sanitize input: clear out the hours/minutes/seconds/millis.
@@ -598,6 +622,9 @@ public class CalendarPickerView extends RecyclerView {
         for (MonthCellDescriptor selectedCell : selectedCells) {
             selectedCell.setRangeState(RangeState.NONE);
         }
+
+        //BacNT: demo
+        notifyClick(date);
 
         switch (selectionMode) {
             case RANGE:
@@ -1054,6 +1081,19 @@ public class CalendarPickerView extends RecyclerView {
     private class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener {
         @Override
         public void onInvalidDateSelected(Date date) {
+        }
+    }
+
+    //BacNT: demo
+    public void setOnClickOKListener(OnClickOKListener onClickOKListener){
+        mOnClickOKListener=onClickOKListener;
+    }
+    public interface OnClickOKListener{
+        void onClickOK(Date date);
+    }
+    private void notifyClick(Date date){
+        if(mOnClickOKListener!=null){
+            mOnClickOKListener.onClickOK(date);
         }
     }
 }

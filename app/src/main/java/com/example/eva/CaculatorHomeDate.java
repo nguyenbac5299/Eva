@@ -18,6 +18,4 @@ public class CaculatorHomeDate {
         DateFormat df = new SimpleDateFormat("EEE dd/MM");
         return df.format(calendar.getTime());
     }
-
-
 }

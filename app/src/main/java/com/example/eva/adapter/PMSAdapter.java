@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eva.R;
+import com.example.eva.callback.OnItemClickListener;
 import com.example.eva.model.ItemPMS;
 
 import java.util.List;
@@ -18,9 +19,6 @@ public class PMSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<ItemPMS> mListPMS;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener{
-        void onItemClick(int position);
-    }
 
     public PMSAdapter(List<ItemPMS> listPMS, OnItemClickListener listener) {
         this.mListPMS = listPMS;

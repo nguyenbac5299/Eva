@@ -89,12 +89,14 @@
             android:layout_height="wrap_content"
             android:text="@string/medicine_remind_one"
             style="@style/TextListTitle"/>
+
         <TextView
+            android:id="@+id/text_time_medicine1"
+            style="@style/TextNumberPink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/medicine_time_one"
-            style="@style/TextNumberPink"/>
+            android:text="@string/medicine_time_one" />
 
     </RelativeLayout>
     <FrameLayout
@@ -122,12 +124,14 @@
             android:layout_height="wrap_content"
             android:text="@string/medicine_remind_two"
             style="@style/TextListTitle"/>
+
         <TextView
+            android:id="@+id/text_time_medicine2"
+            style="@style/TextNumberPink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/medicine_time_two"
-            style="@style/TextNumberPink"/>
+            android:text="@string/medicine_time_two" />
     </RelativeLayout>
     <FrameLayout
         android:id="@+id/layout_time_picker_two"
@@ -153,6 +157,7 @@
             android:text="@string/medicine_remind_three"
             style="@style/TextListTitle"/>
         <TextView
+            android:id="@+id/text_time_medicine3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

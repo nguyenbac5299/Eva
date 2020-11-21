@@ -188,7 +188,7 @@
                 android:layout_marginRight="10dp"/>
             <Switch
                 android:layout_centerVertical="true"
-                android:id="@+id/switch_remind"
+                android:id="@+id/switch_medicine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

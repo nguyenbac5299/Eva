@@ -22,6 +22,7 @@
             android:text="Th4, 28 thg 10"
             android:layout_marginTop="15dp"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             />
         <TextView
             android:id="@+id/text_period"

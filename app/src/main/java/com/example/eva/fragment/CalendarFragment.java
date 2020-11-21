@@ -2,9 +2,11 @@ package com.example.eva.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +50,11 @@ public class CalendarFragment extends Fragment {
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(2);
-
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
         calendarPickerView.deactivateDates(list);
         ArrayList<Date> arrayList = new ArrayList<>();
         try {
-            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+
 
             String strdate = "22-11-2020";
             String strdate2 = "26-11-2020";
@@ -64,12 +66,20 @@ public class CalendarFragment extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        calendarPickerView.setDateTypeface(Typeface.DEFAULT_BOLD);
         calendarPickerView.init(lastYear.getTime(), nextYear.getTime(), new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
                 .inMode(CalendarPickerView.SelectionMode.RANGE) //
 //                .withDeactivateDates(list)
                 .withSubTitles(getSubTitles())
                 .withHighlightedDates(arrayList);
+
+        //BacNT: demo
+        calendarPickerView.setOnClickOKListener(new CalendarPickerView.OnClickOKListener() {
+            @Override
+            public void onClickOK(Date date) {
+                Log.d("BacNT", "demo module: "+ dateformat.format(date.getTime()));
+            }
+        });
 
         calendarPickerView.scrollToDate(new Date());
 
@@ -95,7 +105,7 @@ public class CalendarFragment extends Fragment {
         final ArrayList<SubTitle> subTitles = new ArrayList<>();
         final Calendar tmrw = Calendar.getInstance();
         tmrw.add(Calendar.DAY_OF_MONTH, 1);
-        subTitles.add(new SubTitle(tmrw.getTime(), "₹1000"));
+        subTitles.add(new SubTitle(tmrw.getTime(), getString(R.string.ovulation)));
         return subTitles;
     }
 }

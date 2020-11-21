@@ -1,12 +1,17 @@
 package com.example.eva.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,8 +19,10 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.eva.CaculatorCyclePeriod;
+import com.example.eva.Constant;
+import com.example.eva.Notification;
 import com.example.eva.R;
+import com.example.eva.service.RemindReceiver;
 import com.example.eva.adapter.MainViewPagerAdapter;
 import com.example.eva.callback.OnMenuListener;
 import com.example.eva.data.DBManager;
@@ -26,26 +33,23 @@ import com.example.eva.fragment.MenuFragment;
 import com.example.eva.model.CyclePeriod;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainDemoActivity extends AppCompatActivity implements OnMenuListener {
 
     CyclePeriod mCyclePeriod;
+    SharedPreferences sharedPreferences;
 
-//    FragmentManager mFragmentManager;
-    HomeFragment mHomeFragment;
-    ChartFragment mChartFragment;
-    CalendarFragment mCalendarFragment;
-    MenuFragment mMenuFragment;
-//    ImageView mImageHome, mImageCalendar, mImageChart, mImageMenu;
-
+    MainViewPagerAdapter adapter;
     ActionBar mActionBar;
     TabLayout mTabMain;
     ViewPager mViewPagerMain;
     TextView mTextTitle;
 
-    int mCycle;
-    int mPeriod;
-    //DBManager dbManager;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +57,12 @@ public class MainDemoActivity extends AppCompatActivity implements OnMenuListene
 
         getData();
         init();
-
+        Notification.startNotification(MainDemoActivity.this);
     }
 
+
     private void init() {
-        mActionBar=getSupportActionBar();
+        mActionBar = getSupportActionBar();
         mViewPagerMain = (ViewPager) findViewById(R.id.viewpager_main);
         setupViewPager(mViewPagerMain);
 
@@ -66,7 +71,7 @@ public class MainDemoActivity extends AppCompatActivity implements OnMenuListene
         setupTabIcons();
 
 
-        mTextTitle= new TextView(this);
+        mTextTitle = new TextView(this);
         mTextTitle.setText(getResources().getString(R.string.home));
         mTextTitle.setTextSize(23);
         mTextTitle.setTypeface(null, Typeface.BOLD);
@@ -77,15 +82,14 @@ public class MainDemoActivity extends AppCompatActivity implements OnMenuListene
         getSupportActionBar().setCustomView(mTextTitle);
 
     }
+
     private void getData() {
 
-        DBManager dbManager=new DBManager(this);
-        mCyclePeriod= dbManager.getCurrentCycle();
-
-        mPeriod=mCyclePeriod.getPeriod();
-        mCycle=mCyclePeriod.getCycle();
-
+        sharedPreferences = getSharedPreferences(Constant.SHARED_PREFERENCES, MODE_PRIVATE);
+        DBManager dbManager = new DBManager(this);
+        mCyclePeriod = dbManager.getCurrentCycle();
     }
+
     private void setupTabIcons() {
 
         TextView tabHome = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_main_tab, null);
@@ -110,10 +114,10 @@ public class MainDemoActivity extends AppCompatActivity implements OnMenuListene
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,mCyclePeriod, mCycle, mPeriod);
-        adapter.addFrag(new HomeFragment(),getResources().getString(R.string.home) );
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mCyclePeriod);
+        adapter.addFrag(new HomeFragment(), getResources().getString(R.string.home));
         adapter.addFrag(new CalendarFragment(), getResources().getString(R.string.calendar));
-        adapter.addFrag(new ChartFragment(),getResources().getString(R.string.chart) );
+        adapter.addFrag(new ChartFragment(), getResources().getString(R.string.chart));
         adapter.addFrag(new MenuFragment(), getResources().getString(R.string.more));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -125,21 +129,22 @@ public class MainDemoActivity extends AppCompatActivity implements OnMenuListene
             @Override
             public void onPageSelected(int position) {
                 int title;
-                switch (position){
+                switch (position) {
                     case 0:
-                        title=R.string.home;
+                        title = R.string.home;
                         break;
                     case 1:
-                        title=R.string.calendar;
+                        title = R.string.calendar;
                         break;
                     case 2:
-                        title=R.string.chart;
+                        title = R.string.chart;
                         break;
                     case 3:
-                        title=R.string.more;
+                        title = R.string.more;
                         break;
                     default:
-                        title=R.string.home;break;
+                        title = R.string.home;
+                        break;
                 }
                 mTextTitle.setText(getResources().getString(title));
                 getSupportActionBar().setCustomView(mTextTitle);
@@ -154,13 +159,9 @@ public class MainDemoActivity extends AppCompatActivity implements OnMenuListene
 
     @Override
     public void onChangeMenuCycle(int cycle) {
-        mCycle=cycle;
-        Log.d("MainDemoActivity","change"+ mCycle);
     }
 
     @Override
     public void onChangeMenuPeriod(int period) {
-        mPeriod=period;
-        Log.d("MainDemoActivity","change"+ mPeriod);
     }
 }

@@ -46,7 +46,6 @@ public class SetupCalendarFragment extends Fragment {
                 mYear = year;
                 mMonth = month;
                 mDayOfMonth = dayOfMonth;
-                Log.d("BacNT",dayOfMonth+"/"+month+"/"+year);
                 mListener.onChangeCalendar(mYear, mMonth, mDayOfMonth);
                 mButtonFinish.setVisibility(View.VISIBLE);
             }

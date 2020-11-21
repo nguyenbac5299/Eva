@@ -3,6 +3,7 @@ package com.example.eva.fragment;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,22 +61,22 @@ public class HomeFragment extends Fragment {
             setTextColor(false);
             return;
         }
-        if(state==CaculatorCyclePeriod.IN_FIRST_NORMAL){
+        else if(state==CaculatorCyclePeriod.IN_FIRST_NORMAL){
             mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_normal_textview));
             setTextColor(true);
             return;
         }
-        if(state==CaculatorCyclePeriod.IN_OVULATION){
+        else if(state==CaculatorCyclePeriod.IN_OVULATION){
             mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_ovulation_blur_textview));
             setTextColor(false);
 
         }
-        if(state==CaculatorCyclePeriod.IS_OVULATION){
+        else if(state==CaculatorCyclePeriod.IS_OVULATION){
             mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_ovulation_textview));
             setTextColor(false);
             return;
         }
-        if(state==CaculatorCyclePeriod.IN_SECOND_NORMAL){
+        else if(state==CaculatorCyclePeriod.IN_SECOND_NORMAL){
             mLayoutHome.setBackground(getResources().getDrawable(R.drawable.circle_normal_textview));
             setTextColor(true);
 
@@ -84,19 +85,18 @@ public class HomeFragment extends Fragment {
 
     }
 
-    @SuppressLint("ResourceAsColor")
     private void setTextColor(boolean isNormal){
         if(!isNormal){
-            mTextDate.setTextColor(R.color.colorWhite);
-            mTextPeriod.setTextColor(R.color.colorWhite);
-            mTextNumberDate.setTextColor(R.color.colorWhite);
-            mTextDescription.setTextColor(R.color.colorWhite);
+            mTextDate.setTextColor(getResources().getColor(R.color.colorWhite));
+            mTextPeriod.setTextColor(getResources().getColor(R.color.colorWhite));
+            mTextNumberDate.setTextColor(getResources().getColor(R.color.colorWhite));
+            mTextDescription.setTextColor(getResources().getColor(R.color.colorWhite));
         }
         else {
-            mTextDate.setTextColor(R.color.colorBlueText);
-            mTextPeriod.setTextColor(R.color.colorBlueText);
-            mTextNumberDate.setTextColor(R.color.colorBlueText);
-            mTextDescription.setTextColor(R.color.colorBlueText);
+            mTextDate.setTextColor(getResources().getColor(R.color.colorBlueText));
+            mTextPeriod.setTextColor(getResources().getColor(R.color.colorBlueText));
+            mTextNumberDate.setTextColor(getResources().getColor(R.color.colorBlueText));
+            mTextDescription.setTextColor(getResources().getColor(R.color.colorBlueText));
         }
     }
 

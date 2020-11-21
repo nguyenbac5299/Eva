@@ -62,7 +62,6 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQLQuery);
-        Log.d("BacNT", "createDatabase");
     }
 
     @Override

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.eva.CaculatorCyclePeriod;
+import com.example.eva.Constant;
 import com.example.eva.R;
 import com.example.eva.adapter.SetupViewPagerAdapter;
 import com.example.eva.callback.OnSetupPeriodCycleListener;
@@ -31,8 +32,7 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
     TabLayout mTabLayout;
     ViewPager mViewPager;
     CyclePeriod mCyclePeriod;
-    public static final String SHARED_PREFERENCES="SharedPreferences";
-    public static final String FIRST_TIME="FirstTimeInstall";
+
     DBManager dbManager;
     int mCycle;
     int mPeriod;
@@ -44,8 +44,8 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_demo);
 
-        sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-        String FirstTime=sharedPreferences.getString(FIRST_TIME,"");
+        sharedPreferences=getSharedPreferences(Constant.SHARED_PREFERENCES, MODE_PRIVATE);
+        String FirstTime=sharedPreferences.getString(Constant.FIRST_TIME,"");
 
         if(FirstTime.equals("Yes")){
             Intent intent=new Intent(this, MainDemoActivity.class);
@@ -122,12 +122,12 @@ public  class SetupDemoActivity extends AppCompatActivity implements OnSetupPeri
             dbManager.addCyclePeriod(nextNextCyclePeriod);
 
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putString(FIRST_TIME,"Yes");
+            editor.putString(Constant.FIRST_TIME,"Yes");
+            editor.putInt(Constant.PERIOD, mPeriod);
+            editor.putInt(Constant.CYCLE, mCycle);
             editor.apply();
 
             Intent intent=new Intent(this, MainDemoActivity.class);
-            intent.putExtra("CYCLE", mCycle);
-            intent.putExtra("PERIOD", mPeriod);
             startActivity(intent);
         }
     }

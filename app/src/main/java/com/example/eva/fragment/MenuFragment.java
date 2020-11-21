@@ -2,15 +2,18 @@ package com.example.eva.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,22 +23,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eva.Constant;
 import com.example.eva.R;
 import com.example.eva.activity.MedicineRemindActivity;
 import com.example.eva.activity.PeriodicRemindActivity;
 import com.example.eva.adapter.RemindAdapter;
+import com.example.eva.callback.OnItemClickListener;
 import com.example.eva.callback.OnMenuListener;
+import com.example.eva.callback.OnSwitchChangeListener;
 import com.example.eva.model.Remind;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuFragment extends Fragment implements View.OnClickListener, RemindAdapter.OnItemClickListener {
+public class
+MenuFragment extends Fragment implements View.OnClickListener, OnItemClickListener, OnSwitchChangeListener {
+
     int mPeriod;
     int mCycle;
     View mView;
     ImageView imageMinusPeriod, imagePlusPeriod, imageMinusCycle, imagePlusCycle;
     LinearLayout linearRemind, linearSettings, linearDetailRemind, linearDetailSetting;
+    Switch mSwitchMedicine;
+
     TextView mTextPeriod, mTextCycle;
     RelativeLayout layoutMedicine;
     Boolean mStatusVisibleRemind = false;
@@ -48,6 +58,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
     RadioButton radioEnglish;
 
     OnMenuListener iListener;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor mEditor;
+    Boolean mBeginPeriod, mEndPeriod, mBeginFertility, mEndFertility,mOvulation, mMedicine;
 
 
     @Nullable
@@ -61,14 +74,26 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
     }
 
     private void getData() {
-        mCycle = getArguments().getInt("CYCLE");
-        mPeriod = getArguments().getInt("PERIOD");
+        sharedPreferences =getActivity().getSharedPreferences(Constant.SHARED_PREFERENCES,Context.MODE_PRIVATE);
+        mCycle=sharedPreferences.getInt(Constant.CYCLE,5);
+        mPeriod=sharedPreferences.getInt(Constant.PERIOD,28);
+
+        mBeginPeriod=sharedPreferences.getBoolean(Constant.SWITCH_BEGIN_PERIOD,true);
+        mEndPeriod=sharedPreferences.getBoolean(Constant.SWITCH_END_PERIOD,false);
+        mBeginFertility=sharedPreferences.getBoolean(Constant.SWITCH_BEGIN_FERTILITY,false);
+        mEndFertility=sharedPreferences.getBoolean(Constant.SWITCH_END_FERTILITY,false);
+        mOvulation=sharedPreferences.getBoolean(Constant.SWITCH_OVULATION,false);
+        mMedicine=sharedPreferences.getBoolean(Constant.SWITCH_MEDICINE,false);
+
+        mEditor=sharedPreferences.edit();
     }
 
     private void init() {
 
         mTextPeriod = mView.findViewById(R.id.text_period);
         mTextCycle = mView.findViewById(R.id.text_cycle);
+        mSwitchMedicine=mView.findViewById(R.id.switch_medicine);
+        mSwitchMedicine.setChecked(mMedicine);
 
         mTextPeriod.setText(mPeriod+"");
         mTextCycle.setText(mCycle+"");
@@ -105,11 +130,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
 
         listRemind = new ArrayList<>();
 
-        listRemind.add(new Remind(R.drawable.ic_mc_start, getResources().getString(R.string.start_period_title), getResources().getString(R.string.start_period_content), true));
-        listRemind.add(new Remind(R.drawable.ic_mc_end, getResources().getString(R.string.end_period_title), getResources().getString(R.string.end_period_content), false));
-        listRemind.add(new Remind(R.drawable.ic_ovulation_start, getResources().getString(R.string.start_fertility_title), getResources().getString(R.string.start_fertility_content), false));
-        listRemind.add(new Remind(R.drawable.ic_ovulation_end, getResources().getString(R.string.end_fertility_title), getResources().getString(R.string.end_fertility_content), false));
-        listRemind.add(new Remind(R.drawable.ic_ovulation, getResources().getString(R.string.ovulation), getResources().getString(R.string.ovulation), false));
+        listRemind.add(new Remind(R.drawable.ic_mc_start, getResources().getString(R.string.start_period_title), getResources().getString(R.string.start_period_content), mBeginPeriod));
+        listRemind.add(new Remind(R.drawable.ic_mc_end, getResources().getString(R.string.end_period_title), getResources().getString(R.string.end_period_content), mEndPeriod));
+        listRemind.add(new Remind(R.drawable.ic_ovulation_start, getResources().getString(R.string.start_fertility_title), getResources().getString(R.string.start_fertility_content), mBeginFertility));
+        listRemind.add(new Remind(R.drawable.ic_ovulation_end, getResources().getString(R.string.end_fertility_title), getResources().getString(R.string.end_fertility_content), mEndFertility));
+        listRemind.add(new Remind(R.drawable.ic_ovulation, getResources().getString(R.string.ovulation), getResources().getString(R.string.ovulation), mOvulation));
 
 
         recyclerView = mView.findViewById(R.id.recycle_view);
@@ -119,11 +144,20 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        RemindAdapter adapter = new RemindAdapter(listRemind, this);
+        RemindAdapter adapter = new RemindAdapter(listRemind, this, this);
         recyclerView.setAdapter(adapter);
     }
 
     private void radioGroupChangeListener() {
+        mSwitchMedicine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mMedicine=isChecked;
+                mEditor.putBoolean(Constant.SWITCH_MEDICINE,mMedicine).apply();
+            }
+        });
+
+
         radioGroupLanguage.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -194,8 +228,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
     }
 
     private void visibleDetailRemind() {
-//        Intent intent= new Intent(getActivity(), RemindActivity.class);
-//        startActivity(intent);
+
         mStatusVisibleRemind = !mStatusVisibleRemind;
         if (mStatusVisibleRemind) {
             linearDetailRemind.setVisibility(View.VISIBLE);
@@ -208,14 +241,18 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
 
 
     @Override
-    public void OnItemClick(int position) {
+    public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), PeriodicRemindActivity.class);
+        intent.putExtra("ID",position);
         startActivity(intent);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mEditor.putInt(Constant.PERIOD, mPeriod);
+        mEditor.putInt(Constant.CYCLE, mCycle);
+        mEditor.apply();
         iListener.onChangeMenuCycle(mCycle);
         iListener.onChangeMenuPeriod(mPeriod);
     }
@@ -229,5 +266,28 @@ public class MenuFragment extends Fragment implements View.OnClickListener, Remi
 
         }
 
+    }
+
+    @Override
+    public void switchChange(int position, boolean isChecked) {
+        switch (position){
+            case 0:
+                mEditor.putBoolean(Constant.SWITCH_BEGIN_PERIOD,isChecked).apply();
+                break;
+            case 1:
+                mEditor.putBoolean(Constant.SWITCH_END_PERIOD,isChecked).apply();
+                break;
+            case 2:
+                mEditor.putBoolean(Constant.SWITCH_BEGIN_FERTILITY,isChecked).apply();
+                break;
+            case 3:
+                mEditor.putBoolean(Constant.SWITCH_END_FERTILITY,isChecked).apply();
+                break;
+            case 4:
+                mEditor.putBoolean(Constant.SWITCH_OVULATION,isChecked).apply();
+                break;
+            default:
+                break;
+        }
     }
 }

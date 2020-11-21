@@ -5,6 +5,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextListTitle" >
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+    </style>
+
     <style name="CalendarCell">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>

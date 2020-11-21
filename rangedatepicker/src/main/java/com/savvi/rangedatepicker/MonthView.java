@@ -2,13 +2,18 @@ package com.savvi.rangedatepicker;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -17,13 +22,20 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static com.savvi.rangedatepicker.R.drawable.grey_left_button;
+
 public class MonthView extends LinearLayout {
     TextView title;
+    TextView demo;
     CalendarGridView grid;
     private Listener listener;
     private List<CalendarCellDecorator> decorators;
     private boolean isRtl;
     private Locale locale;
+    static boolean yes = false;
+    static boolean no = false;
+    TextView buttonYes;
+    TextView buttonNo;
 
     ArrayList<Integer> deactivatedDates;
 
@@ -37,7 +49,7 @@ public class MonthView extends LinearLayout {
     }
 
     public static MonthView create(ViewGroup parent, LayoutInflater inflater,
-                                   DateFormat weekdayNameFormat, Listener listener, Calendar today, int dividerColor,
+                                   DateFormat weekdayNameFormat, final Listener listener, Calendar today, int dividerColor,
                                    int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
                                    int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale,
                                    DayViewAdapter adapter) {
@@ -67,6 +79,41 @@ public class MonthView extends LinearLayout {
         today.set(Calendar.DAY_OF_WEEK, originalDayOfWeek);
         view.listener = listener;
         view.decorators = decorators;
+
+        //BacNT: demo
+        final TextView buttonYes = view.findViewById(R.id.button_calendar_yes);
+        final TextView buttonNo = view.findViewById(R.id.button_calendar_no);
+        buttonYes.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View view) {
+                yes = !yes;
+                if (yes){
+                    buttonYes.setBackground(view.getResources().getDrawable(R.drawable.pink_left_button));
+                    buttonNo.setBackground(view.getResources().getDrawable(R.drawable.grey_right_button));}
+                else{
+                    buttonYes.setBackground(view.getResources().getDrawable(R.drawable.grey_left_button));
+                    buttonNo.setBackground(view.getResources().getDrawable(R.drawable.pink_right_button));
+                }
+                listener.clickButtonYes(yes);
+            }
+        });
+        buttonNo.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View view) {
+                yes=!yes;
+                if (yes){
+                    buttonYes.setBackground(view.getResources().getDrawable(R.drawable.pink_left_button));
+                    buttonNo.setBackground(view.getResources().getDrawable(R.drawable.grey_right_button));}
+                else{
+                    buttonYes.setBackground(view.getResources().getDrawable(R.drawable.grey_left_button));
+                    buttonNo.setBackground(view.getResources().getDrawable(R.drawable.pink_right_button));
+                }
+                listener.clickButtonNo(yes);
+            }
+        });
+
         return view;
     }
 
@@ -101,6 +148,7 @@ public class MonthView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         title = (TextView) findViewById(R.id.title);
+        demo = (TextView) findViewById(R.id.text);
         grid = (CalendarGridView) findViewById(R.id.calendar_grid);
     }
 
@@ -221,5 +269,9 @@ public class MonthView extends LinearLayout {
 
     public interface Listener {
         void handleClick(MonthCellDescriptor cell);
+
+        void clickButtonYes(boolean yes);
+
+        void clickButtonNo(boolean yes);
     }
 }

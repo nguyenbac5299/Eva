@@ -22,12 +22,7 @@ CaculatorCyclePeriod {
     public static final int IN_SECOND_NORMAL = 8;
     public static final int IN_NEXT_CYCLE = 9;
 
-    //static CyclePeriod cyclePeriod;
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-//    public CaculatorCyclePeriod(CyclePeriod cyclePeriod) {
-//        this.cyclePeriod = cyclePeriod;
-//    }
 
     public static String caculatorEndDate(CyclePeriod cyclePeriod) {
         return caculatorDate(cyclePeriod.getBeginDate(), cyclePeriod.getPeriod() - 1);
@@ -177,6 +172,8 @@ CaculatorCyclePeriod {
     }
 
     public static String caculatorOvulationDate(CyclePeriod cyclePeriod) {
+        if(cyclePeriod.getUserBeginDate()!=null)
+            return caculatorDate(cyclePeriod.getUserBeginDate(),cyclePeriod.getCycle()-14);
         return caculatorDate(cyclePeriod.getBeginDate(), cyclePeriod.getCycle() - 14);
     }
 
@@ -235,5 +232,6 @@ CaculatorCyclePeriod {
         month = Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
         return month;
     }
+
 
 }

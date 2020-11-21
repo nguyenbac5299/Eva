@@ -12,21 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eva.R;
+import com.example.eva.callback.OnItemClickListener;
+import com.example.eva.callback.OnSwitchChangeListener;
 import com.example.eva.model.Remind;
 
 import java.util.List;
 
 public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Remind> listRemind;
-    private OnItemClickListener mListener;
+    private OnItemClickListener mItemClickListener;
+    private OnSwitchChangeListener mSwitchListener;
 
-    public interface OnItemClickListener{
-        void OnItemClick(int position);
-    }
+    public RemindAdapter(List<Remind> listRemind, OnItemClickListener clickListener, OnSwitchChangeListener switchListener) {
 
-    public RemindAdapter(List<Remind> listRemind, OnItemClickListener listener) {
-
-        mListener=listener;
+        mItemClickListener =clickListener;
+        mSwitchListener= switchListener;
         this.listRemind = listRemind;
     }
 
@@ -52,6 +52,7 @@ public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 listRemind.get(viewHolder.getAdapterPosition()).setChooseSwitch(isChecked);
+                mSwitchListener.switchChange(viewHolder.getAdapterPosition(), isChecked);
             }
         });
     }
@@ -72,7 +73,7 @@ public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.OnItemClick(getAdapterPosition());
+                    mItemClickListener.onItemClick(getAdapterPosition());
                 }
             });
             imageRemind = itemView.findViewById(R.id.image_remind);

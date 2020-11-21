@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <com.savvi.rangedatepicker.MonthView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -71,4 +72,109 @@
 
         <include layout="@layout/week" />
     </com.savvi.rangedatepicker.CalendarGridView>
+    <View
+        android:id="@+id/view_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/linear_edit_period"
+        android:background="@color/colorLine" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="17dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/image_guess"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_ellipse_guess"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="@string/guess" />
+
+        <ImageView
+            android:id="@+id/image_period"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_ellipse__period"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="@string/period"/>
+        <ImageView
+            android:id="@+id/image_pregnant"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_ellipse__pregnant"/>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="@string/Fertility"/>
+        <ImageView
+            android:id="@+id/image_ovulation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_ovulation"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:text="@string/ovulation"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/view_linear2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginVertical="5dp"
+        android:layout_below="@+id/linear_edit_period"
+        android:background="@color/colorLine" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_mc_length"/>
+        <TextView
+            android:id="@+id/text_calendar_period"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/calendar_text_begin_period"
+            style="@style/TextListTitle"/>
+        <TextView
+            android:id="@+id/button_calendar_yes"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1.3"
+            android:textColor="@color/colorWhite"
+            android:text="@string/yes"
+            android:gravity="center"
+            android:background="@drawable/pink_left_button" />
+        <TextView
+            android:id="@+id/button_calendar_no"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1.3"
+            android:textColor="@color/colorWhite"
+            android:text="@string/no"
+            android:gravity="center"
+            android:background="@drawable/grey_right_button"/>
+
+    </LinearLayout>
 </com.savvi.rangedatepicker.MonthView>

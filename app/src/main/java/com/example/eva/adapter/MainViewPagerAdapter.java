@@ -1,12 +1,14 @@
 package com.example.eva.adapter;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.eva.callback.OnMenuListener;
 import com.example.eva.fragment.CalendarFragment;
 import com.example.eva.fragment.ChartFragment;
 import com.example.eva.fragment.HomeFragment;
@@ -19,20 +21,20 @@ import java.util.List;
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
     CyclePeriod mCyclePeriod;
-    int mCycle, mPeriod;
+
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public MainViewPagerAdapter(@NonNull FragmentManager fm, int behavior, CyclePeriod cyclePeriod, int cycle, int period) {
+    public MainViewPagerAdapter(@NonNull FragmentManager fm, int behavior, CyclePeriod cyclePeriod) {
         super(fm, behavior);
         mCyclePeriod=cyclePeriod;
-        mCycle=cycle;
-        mPeriod=period;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        Log.d("BacNT", "getIteam");
+
         switch (position) {
             case 0:
                 HomeFragment homeFragment=new HomeFragment();
@@ -47,8 +49,6 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
             case 3:
                 MenuFragment menuFragment=new MenuFragment();
                 Bundle bundleMenu=new Bundle();
-                bundleMenu.putInt("CYCLE", mCycle);
-                bundleMenu.putInt("PERIOD", mPeriod);
                 menuFragment.setArguments(bundleMenu);
                 return menuFragment;
             default:
@@ -73,5 +73,6 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);
     }
+
 }
 

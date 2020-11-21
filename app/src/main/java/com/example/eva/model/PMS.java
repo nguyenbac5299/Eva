@@ -24,7 +24,7 @@ public class PMS {
     }
 
     public static class Sporting {
-        public static final int NOSPORTING = 0;
+        public static final int NO_SPORTING = 0;
         public static final int RUN = 1;
         public static final int CYCLING = 2;
         public static final int GYM = 3;

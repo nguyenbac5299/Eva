@@ -10,12 +10,13 @@ import android.widget.Toast;
 import com.example.eva.R;
 import com.example.eva.adapter.PMSAdapter;
 import com.example.eva.adapter.RemindAdapter;
+import com.example.eva.callback.OnItemClickListener;
 import com.example.eva.model.ItemPMS;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PMSActivity extends AppCompatActivity implements PMSAdapter.OnItemClickListener {
+public class PMSActivity extends AppCompatActivity implements OnItemClickListener {
 
     public static final int ID_MENSTRUATION=0;
     public static final int ID_MOOD=0;

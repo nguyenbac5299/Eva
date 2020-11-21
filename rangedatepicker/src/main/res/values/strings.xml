@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">rangedatepicker</string>
+    <string name="guess">Dự đoán</string>
+    <string name="finish">Hoàn thành</string>
+    <string name="period">Giai đoạn</string>
+    <string name="Fertility">Thụ thai</string>
+    <string name="ovulation">Rụng trứng</string>
+    <string name="calendar_text_begin_period">Giai đoạn bắt đầu </string>
+    <string name="calendar_text_end_period">Giai đoạn kết thúc </string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+
 </resources>
