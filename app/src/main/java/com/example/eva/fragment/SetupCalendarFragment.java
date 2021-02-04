@@ -2,7 +2,6 @@ package com.example.eva.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ public class SetupCalendarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setup_celendar, container, false);
-        CalendarView calendarView = view.findViewById(R.id.calendar_view);
+        CalendarView calendarView = view.findViewById(R.id.setup_calendar_view);
 
         mButtonFinish=view.findViewById(R.id.button_finish);
         mButtonFinish.setVisibility(View.GONE);

@@ -1,6 +1,10 @@
 package com.example.eva.model;
 
-public class ItemPMS {
+import android.os.Parcel;
+
+import java.io.Serializable;
+
+public class ItemPMS implements Serializable {
     int image;
     boolean status;
     String text;
@@ -9,6 +13,12 @@ public class ItemPMS {
         this.image = image;
         this.status = status;
         this.text = text;
+    }
+
+    protected ItemPMS(Parcel in) {
+        image = in.readInt();
+        status = in.readByte() != 0;
+        text = in.readString();
     }
 
     public int getImage() {

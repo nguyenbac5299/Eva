@@ -1,61 +1,52 @@
 package com.example.eva.adapter;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.eva.callback.OnMenuListener;
 import com.example.eva.fragment.CalendarFragment;
-import com.example.eva.fragment.ChartFragment;
+import com.example.eva.fragment.ChartCycleFragment;
 import com.example.eva.fragment.HomeFragment;
 import com.example.eva.fragment.MenuFragment;
-import com.example.eva.model.CyclePeriod;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
-    CyclePeriod mCyclePeriod;
-
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public MainViewPagerAdapter(@NonNull FragmentManager fm, int behavior, CyclePeriod cyclePeriod) {
+    public MainViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
-        mCyclePeriod=cyclePeriod;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Log.d("BacNT", "getIteam");
-
         switch (position) {
             case 0:
-                HomeFragment homeFragment=new HomeFragment();
-                Bundle bundleHome=new Bundle();
-                bundleHome.putSerializable("CYCLEPERIOD",mCyclePeriod);
-                homeFragment.setArguments(bundleHome);
+                HomeFragment homeFragment = new HomeFragment();
                 return homeFragment;
             case 1:
                 return new CalendarFragment();
             case 2:
-                return new ChartFragment();
+                return new ChartCycleFragment();
             case 3:
-                MenuFragment menuFragment=new MenuFragment();
-                Bundle bundleMenu=new Bundle();
+                MenuFragment menuFragment = new MenuFragment();
+                Bundle bundleMenu = new Bundle();
                 menuFragment.setArguments(bundleMenu);
                 return menuFragment;
             default:
-                HomeFragment homeFragment1=new HomeFragment();
-                Bundle bundle1=new Bundle();
-                bundle1.putSerializable("CYCLEPERIOD",mCyclePeriod);
-                homeFragment1.setArguments(bundle1);
+                HomeFragment homeFragment1 = new HomeFragment();
                 return homeFragment1;
         }
     }
@@ -64,6 +55,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mFragmentList.size();
     }
+
     public void addFrag(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);

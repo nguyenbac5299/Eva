@@ -1,3 +1,2 @@
-include ':rangedatepicker'
 include ':app'
 rootProject.name = "Eva"

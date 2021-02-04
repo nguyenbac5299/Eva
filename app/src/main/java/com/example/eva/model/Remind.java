@@ -1,16 +1,40 @@
 package com.example.eva.model;
 
 public class Remind {
+    int ID;
     int image;
     String title;
     String content;
     boolean chooseSwitch;
+    String time;
 
     public Remind(int image, String title, String content, boolean chooseSwitch) {
         this.image = image;
         this.title = title;
         this.content = content;
         this.chooseSwitch = chooseSwitch;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Remind( boolean chooseSwitch, String time, String content) {
+        this.content = content;
+        this.chooseSwitch = chooseSwitch;
+        this.time = time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public Remind() {

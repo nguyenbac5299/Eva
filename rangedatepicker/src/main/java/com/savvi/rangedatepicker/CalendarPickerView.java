@@ -160,9 +160,8 @@ public class CalendarPickerView extends RecyclerView {
         if (isInEditMode()) {
             Calendar nextYear = Calendar.getInstance(timeZone, locale);
             nextYear.add(Calendar.YEAR, 1);
-
-            init(new Date(), nextYear.getTime()) //
-                    .withSelectedDate(new Date());
+            Log.d("BacNT","isInEditMode");
+            init(new Date(), nextYear.getTime()).withSelectedDate(new Date());
         }
     }
 
@@ -292,6 +291,7 @@ public class CalendarPickerView extends RecyclerView {
 
 
         public FluentInitializer withSelectedDates(Collection<Date> selectedDates) {
+            Log.d("BacNT", "withSelectedDates");
             if (selectionMode == SelectionMode.SINGLE && selectedDates.size() > 1) {
                 throw new IllegalArgumentException("SINGLE mode can't be used with multiple selectedDates");
             }
@@ -526,6 +526,7 @@ public class CalendarPickerView extends RecyclerView {
         @Override
         public void handleClick(MonthCellDescriptor cell) {
             mCell=cell;
+            Log.d("BacNT","handleClick");
             demo(cell);
         }
 
@@ -563,12 +564,15 @@ public class CalendarPickerView extends RecyclerView {
                     invalidDateListener.onInvalidDateSelected(clickedDate);
                 }
             } else {
+                Log.d("BacNT","selectDate");
                 boolean wasSelected = doSelectDate(clickedDate, cell);
 
                 if (dateListener != null) {
                     if (wasSelected) {
+                        Log.d("BacNT","wasSelected");
                         dateListener.onDateSelected(clickedDate);
                     } else {
+                        Log.d("BacNT","else");
                         dateListener.onDateUnselected(clickedDate);
                     }
                 }

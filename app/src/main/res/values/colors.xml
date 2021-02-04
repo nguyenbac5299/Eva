@@ -4,10 +4,10 @@
     <color name="colorPrimary">#FFCA4774</color>
     <color name="colorPrimaryDark">#FFCA4774</color>
     <color name="colorTheme">#f6889d</color>
-    <color name="colorAccent">#FFBF7A91</color>
+    <color name="colorAccent">#000000</color>
     <color name="colorPinkBackground">#F0FBDDE3</color>
     <color name="colorMainPink">#f6889d</color>
-    <color name="colorDivider">#FFCA4774</color>
+    <color name="colorDivider">#BEB6B2B2</color>
     <color name="colorPinkText">#FFB82D5D</color>
     <color name="colorPinkImageButtonOn">#C8F16A7E</color>
     <color name="colorImageButtonOff">#BEB6B2B2</color>
@@ -18,12 +18,17 @@
     <color name="colorCircleOvulationBlur">#12c5d1</color>
     <color name="colorCircleNormal">#dfe5f9</color>
     <color name="colorTextBlack">#D7232323</color>
+    <color name="colorTextGrey">#D74E4C4C</color>
     <color name="background_note">#fef8f8</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlueText">#14182C</color>
+    <color name="colorBlueText">#333B63</color>
 
+    <color name="colorHomeDetailPeriod">#4FF3CAD2</color>
+    <color name="colorHomeDetailNormal">#DDDFE5F9</color>
+    <color name="colorHomeDetailFertility">#4DBAF2F6</color>
+    <color name="colorHomeDetailOvulation">#57B6F1F8</color>
+    <color name="colorTextFertility">#056A75</color>
+    <color name="colorBackgroundAD">#FAEB66</color>
 
-    <color name="calendar_selected_day_bg">#f6889d</color>
-    <color name="calendar_selected_range_bg">#f6889d</color>
 
 </resources>

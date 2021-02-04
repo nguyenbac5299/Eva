@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/len_20"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/text_setup_period"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="@dimen/len_80"
         android:text="@string/detail_setup_period"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="17sp"/>
+        style="@style/TextSubTitleSetup"/>
 
     <com.shawnlin.numberpicker.NumberPicker
         android:id="@+id/number_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:np_width="64dp"
-        app:np_height="180dp"
+        app:np_width="@dimen/len_128"
+        app:np_height="@dimen/len_360"
         app:np_dividerColor="@color/colorDivider"
         app:np_max="13"
         app:np_min="2"
@@ -29,5 +28,13 @@
         app:np_value="5"
         app:np_wheelItemCount="5"
         android:layout_below="@+id/text_setup_period"/>
-
-</RelativeLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="@dimen/len_250"
+        android:layout_height="@dimen/len_200"
+        app:lottie_fileName="swipe.json"
+        android:layout_gravity="center_horizontal"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:layout_marginTop="@dimen/len_50"/>
+</LinearLayout>

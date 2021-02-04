@@ -2,11 +2,9 @@ package com.example.eva.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -20,9 +18,8 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends Fragment {
 
-    TimePicker timePicker;
-    Button buttonCancel, buttonSave;
-    Calendar calendar;
+    TimePicker mTimePicker;
+    Calendar mCalendar;
     OnTimePickerPeriodicListener mPeriodicListener;
 
 
@@ -30,39 +27,26 @@ public class TimePickerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_time_picker, container, false);
-        timePicker = view.findViewById(R.id.time_picker);
-        timePicker.setIs24HourView(true);
-        buttonCancel = view.findViewById(R.id.button_cancel);
-        buttonSave = view.findViewById(R.id.button_save);
+        mTimePicker = view.findViewById(R.id.time_picker);
+        mTimePicker.setIs24HourView(true);
 
-
-        onClickListener();
+        mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                getTime();
+                mPeriodicListener.onSetTime(mCalendar, true, getTag());
+            }
+        });
 
         return view;
     }
 
     private void getTime() {
-        calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
-        calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+        mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.HOUR_OF_DAY, mTimePicker.getCurrentHour());
+        mCalendar.set(Calendar.MINUTE, mTimePicker.getCurrentMinute());
     }
 
-    private void onClickListener() {
-
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getTime();
-                mPeriodicListener.onSetTime(calendar, true, getTag());
-            }
-        });
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPeriodicListener.onSetTime(calendar, false, getTag());
-            }
-        });
-    }
 
     @Override
     public void onAttach(@NonNull Context context) {

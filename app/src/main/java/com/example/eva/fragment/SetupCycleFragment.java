@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.eva.Constant;
 import com.example.eva.R;
 import com.example.eva.callback.OnSetupPeriodCycleListener;
 import com.shawnlin.numberpicker.NumberPicker;
 
 public class SetupCycleFragment extends Fragment {
-    OnSetupPeriodCycleListener mListener;
-    int mCycle = 28;
+    OnSetupPeriodCycleListener IListener;
+    int mCycle = Constant.DEFAULT_CYCLE;
 
     @Nullable
     @Override
@@ -30,10 +31,10 @@ public class SetupCycleFragment extends Fragment {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 mCycle = newVal;
-                mListener.onChangeCycle(mCycle);
+                IListener.onChangeCycle(mCycle);
             }
         });
-        mListener.onChangeCycle(mCycle);
+        IListener.onChangeCycle(mCycle);
 
         return view;
     }
@@ -41,6 +42,6 @@ public class SetupCycleFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mListener = (OnSetupPeriodCycleListener) context;
+        IListener = (OnSetupPeriodCycleListener) context;
     }
 }

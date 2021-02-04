@@ -1,49 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PMSActivity"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/len_20"
+    android:scrollbars="none">
+    <Button
+        android:id="@+id/button_save_pms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_pink_big_button"
+        android:text="@string/save"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:textColor="@color/colorWhite"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/image_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"/>
+            <TextView
+                android:id="@+id/text_current_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="demo"
+                android:textSize="@dimen/len_36"
+                android:textStyle="bold"
+                android:textColor="@color/colorMainPink"/>
+        </FrameLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextSubTitle"
-            android:text="@string/menstruation"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_menstruation"
+            android:text="@string/note"
+            style="@style/TextSubTitle"/>
+        <EditText
+            android:id="@+id/edit_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:background="@color/colorHomeDetailPeriod"
+            android:textColor="@color/colorPinkText"
+            android:gravity="top"
+            android:textSize="@dimen/len_30"
+            android:theme="@style/AppTheme.Cursor"
+            android:padding="@dimen/len_20"
+            android:layout_marginTop="@dimen/len_20"
+            android:hint="@string/hint_note"/>
         <View
-            android:id="@+id/view_linear4"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
             android:background="@color/colorLine" />
+        <LinearLayout
+            android:id="@+id/layout_menstruation"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextSubTitle"
+                android:text="@string/menstruation"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_menstruation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_20"/>
+            <View
+                android:id="@+id/view_linear4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_1"
+                android:layout_marginVertical="@dimen/len_24"
+                android:background="@color/colorLine" />
+        </LinearLayout>
+
 
         <TextView
             style="@style/TextSubTitle"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="@dimen/len_50"
             android:text="@string/mood" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_mood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="@dimen/len_20" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
             android:background="@color/colorLine" />
         <TextView
             android:layout_width="match_parent"
@@ -54,12 +114,30 @@
             android:id="@+id/recycle_symptom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/len_20"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
             android:background="@color/colorLine" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextSubTitle"
+            android:text="@string/sex"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_20"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
+            android:background="@color/colorLine" />
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,12 +148,17 @@
             android:id="@+id/recycle_medicine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/len_20"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
             android:background="@color/colorLine" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextSubTitle"
+            android:text="@string/healthy"/>
 
         <RelativeLayout
             android:id="@+id/layout_healthy"
@@ -85,68 +168,155 @@
                 android:id="@+id/layout_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="@dimen/len_20">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/weight"
-                    style="@style/TextSubTitle"/>
+                    style="@style/TextSubTitleHealthy"
+                    android:layout_marginTop="@dimen/len_6"/>
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/image_weight"
+                    android:layout_width="@dimen/len_120"
+                    android:layout_height="@dimen/len_120"
                     android:src="@drawable/ic_weight"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="@dimen/len_60" />
                 <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/text_number_weight"
+                    android:layout_width="@dimen/len_120"
+                    android:layout_height="@dimen/len_120"
                     style="@style/TextHealthy"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/len_60"
                     android:text="50.0 kg" />
             </FrameLayout>
             <FrameLayout
+                android:id="@+id/layout_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/layout_weight"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="@dimen/len_40">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/temperature"
-                    style="@style/TextSubTitle"/>
+                    style="@style/TextSubTitleHealthy"
+                    android:layout_marginTop="@dimen/len_6"/>
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/image_temperature"
+                    android:layout_width="@dimen/len_120"
+                    android:layout_height="@dimen/len_120"
                     android:src="@drawable/ic_tem_edit"
-                    android:layout_marginTop="30dp"/>
+                    android:layout_marginTop="@dimen/len_60"/>
                 <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/text_number_temp"
+                    android:layout_width="@dimen/len_120"
+                    android:layout_height="@dimen/len_120"
                     style="@style/TextHealthy"
-                    android:layout_marginTop="30dp"
-                    android:text="37.0  &#xb0;C" />
+                    android:layout_marginTop="@dimen/len_60"
+                    android:text="37.0 &#xb0;C" />
             </FrameLayout>
 
+            <RelativeLayout
+                android:id="@+id/layout_edit_healthy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_weight"
+                android:layout_marginTop="@dimen/len_20"
+                android:layout_marginLeft="@dimen/len_20">
+                <Button
+                    android:id="@+id/button_cancel_healthy"
+                    android:layout_width="@dimen/len_100"
+                    android:layout_height="@dimen/len_60"
+                    android:background="@drawable/bg_pink_small_button"
+                    android:text="@string/cancel"
+                    android:textColor="#FFFFFF"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:id="@+id/text_healthy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weight"
+                    android:layout_centerHorizontal="true"
+                    style="@style/TextSubTitleHealthy"/>
+                <Button
+                    android:id="@+id/button_save_healthy"
+                    android:layout_width="@dimen/len_100"
+                    android:layout_height="@dimen/len_60"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pink_small_button"
+                    android:text="@string/save"
+                    android:textColor="#FFFFFF"
+                    android:layout_alignParentRight="true"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/button_cancel_healthy"
+                    android:layout_marginHorizontal="@dimen/len_40">
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/number_picker_healthy_1"
+                        android:layout_width="@dimen/len_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:np_textSize="@dimen/len_26"
+                        app:np_wheelItemCount="7"
+                        app:np_dividerColor="@color/colorDivider"
+                        app:np_wrapSelectorWheel="true"
+                        app:np_selectedTextColor="@color/colorPinkText"
+                        app:np_textColor="@color/colorMainPink"
+                        app:np_dividerDistance="@dimen/len_60"
+                        android:layout_marginRight="@dimen/len_60"/>
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/number_picker_healthy_2"
+                        android:layout_width="@dimen/len_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:np_textSize="@dimen/len_26"
+                        app:np_wheelItemCount="7"
+                        app:np_dividerColor="@color/colorDivider"
+                        app:np_wrapSelectorWheel="true"
+                        app:np_selectedTextColor="@color/colorPinkText"
+                        app:np_textColor="@color/colorMainPink"
+                        app:np_dividerDistance="@dimen/len_60"/>
+                    <TextView
+                        android:id="@+id/text_unit"
+                        android:layout_width="@dimen/len_0"
+                        android:layout_weight="0.2"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="@dimen/len_40"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_healthy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_20"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
+            android:layout_below="@+id/linear_detail_setting"
             android:background="@color/colorLine" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextSubTitle"
-            android:text="@string/healthy"/>
+            android:text="@string/vaginal_discharge"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_healthy"
+            android:id="@+id/recycle_charge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/len_20"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
-            android:layout_below="@+id/linear_detail_setting"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
             android:background="@color/colorLine" />
         <TextView
             android:layout_width="match_parent"
@@ -157,51 +327,14 @@
             android:id="@+id/recycle_sporty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/len_20"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="@dimen/len_1"
+            android:layout_marginVertical="@dimen/len_24"
             android:background="@color/colorLine" />
-        <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="@string/note"
-           style="@style/TextSubTitle"/>
-        <FrameLayout
-            android:id="@+id/layout_note"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/background_note">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/note"/>
-        </FrameLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginVertical="12dp"
-            android:background="@color/colorLine" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextSubTitle"
-            android:text="@string/edit_options"/>
-        <FrameLayout
-            android:id="@+id/layout_edit_option"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/background_note">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/edit_option"/>
-        </FrameLayout>
     </LinearLayout>
-   
+    </ScrollView>
 
-</ScrollView>
+</FrameLayout>

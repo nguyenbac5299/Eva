@@ -19,15 +19,15 @@ import com.example.eva.model.Remind;
 import java.util.List;
 
 public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<Remind> listRemind;
-    private OnItemClickListener mItemClickListener;
-    private OnSwitchChangeListener mSwitchListener;
+    List<Remind> mListRemind;
+    private OnItemClickListener IOnItemClickListener;
+    private OnSwitchChangeListener IOnSwitchListener;
 
     public RemindAdapter(List<Remind> listRemind, OnItemClickListener clickListener, OnSwitchChangeListener switchListener) {
 
-        mItemClickListener =clickListener;
-        mSwitchListener= switchListener;
-        this.listRemind = listRemind;
+        IOnItemClickListener =clickListener;
+        IOnSwitchListener = switchListener;
+        this.mListRemind = listRemind;
     }
 
     @NonNull
@@ -40,7 +40,7 @@ public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         RemindViewHolder viewHolder = (RemindViewHolder) holder;
-        Remind remind = listRemind.get(position);
+        Remind remind = mListRemind.get(position);
 
 
         viewHolder.imageRemind.setImageResource(remind.getImage());
@@ -51,15 +51,15 @@ public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         viewHolder.switchRemind.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                listRemind.get(viewHolder.getAdapterPosition()).setChooseSwitch(isChecked);
-                mSwitchListener.switchChange(viewHolder.getAdapterPosition(), isChecked);
+                mListRemind.get(viewHolder.getAdapterPosition()).setChooseSwitch(isChecked);
+                IOnSwitchListener.switchChange(viewHolder.getAdapterPosition(), isChecked);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return listRemind.size();
+        return mListRemind.size();
     }
 
     class RemindViewHolder extends RecyclerView.ViewHolder {
@@ -73,7 +73,7 @@ public class RemindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mItemClickListener.onItemClick(getAdapterPosition());
+                    IOnItemClickListener.onItemClick(getAdapterPosition());
                 }
             });
             imageRemind = itemView.findViewById(R.id.image_remind);

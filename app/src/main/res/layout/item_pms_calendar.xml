@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/len_10">
+
+    <ImageView
+        android:id="@+id/image_image_calendar"
+        android:layout_width="@dimen/len_60"
+        android:layout_height="@dimen/len_60"
+        android:src="@drawable/ic_mood_angry"
+        android:layout_marginRight="@dimen/len_10"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/text_image_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/len_60"
+        android:gravity="center_vertical"
+        android:text="demo"
+        android:layout_toRightOf="@id/image_image_calendar"
+        android:visibility="gone"
+        style="@style/TextChartSubTitle"
+        android:textSize="@dimen/len_26"/>
+</RelativeLayout>

@@ -3,29 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/len_20">
     <TextView
         android:id="@+id/text_setup_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/detail_setup_calendar"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="17sp"/>
+        style="@style/TextSubTitleSetup"/>
 
     <CalendarView
-        android:id="@+id/calendar_view"
+        android:id="@+id/setup_calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/text_setup_calendar"/>
+        android:layout_marginTop="@dimen/len_80"
+        android:layout_below="@+id/text_setup_calendar"
+        />
     <Button
         android:id="@+id/button_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_button"
-        android:layout_margin="20dp"
+        android:background="@drawable/bg_pink_big_button"
+        android:layout_margin="@dimen/len_40"
         android:layout_alignParentBottom="true"
         android:text="@string/finish"
         />

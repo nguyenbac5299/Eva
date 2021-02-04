@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ViewLinearPink">
+        <item name="android:layout_width">@dimen/len_3</item>
+        <item name="android:layout_height">@dimen/len_60</item>
+        <item name="android:layout_marginLeft">@dimen/len_30</item>
+        <item name="android:layout_marginVertical">@dimen/len_4</item>
+    </style>
+</resources>

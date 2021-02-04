@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -187,8 +188,10 @@ public class MonthView extends LinearLayout {
 
                     cellView.setEnabled(cell.isCurrentMonth());
                     int dayOfWeek = c + 1;
+                    //BacNT: custom fale-> true
                     if (deactivatedDates.contains(dayOfWeek))
-                        cellView.setClickable(false);
+                        cellView.setClickable(true);
+                    //BacNT: custom
                     else
                         cellView.setClickable(!displayOnly);
 
@@ -201,7 +204,7 @@ public class MonthView extends LinearLayout {
                         cellView.setRangeState(cell.getRangeState());
                         cellView.setHighlighted(cell.isHighlighted());
                         cellView.setRangeUnavailable(cell.isUnavailable());
-                        cellView.setDeactivated(true);
+                        cellView.setDeactivated(false);
 
                     } else {
 

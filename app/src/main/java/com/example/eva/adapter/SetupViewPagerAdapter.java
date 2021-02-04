@@ -14,7 +14,6 @@ public class SetupViewPagerAdapter extends FragmentStatePagerAdapter {
     public SetupViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {

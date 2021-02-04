@@ -3,25 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.PeriodicRemindActivity"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/len_20"
+    android:padding="@dimen/len_20">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextTitleDialog"
+        android:text="@string/periodic_remind"/>
+
     <TextView
         android:id="@+id/text_time_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/TextSubTitle"
         android:text="@string/time"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="@dimen/len_20"
+        android:layout_below="@+id/text_title" />
     <TextView
         android:id="@+id/text_time_periodic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="@string/medicine_time_one"
-        android:layout_marginTop="10dp"
-        style="@style/TextNumberPink"/>
+        android:layout_marginTop="@dimen/len_20"
+        style="@style/TextTimePink"
+        android:layout_below="@+id/text_title" />
     <FrameLayout
         android:id="@+id/layout_time_picker_periodic"
         android:layout_width="match_parent"
@@ -30,8 +41,8 @@
     <View
         android:id="@+id/view_linear1"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginVertical="12dp"
+        android:layout_height="@dimen/len_1"
+        android:layout_marginVertical="@dimen/len_24"
         android:background="@color/colorLine"
         android:layout_below="@+id/layout_time_picker_periodic"/>
 
@@ -44,12 +55,35 @@
         android:textColor="@color/colorTextBlack"
         style="@style/TextSubTitle" />
     <EditText
-        android:layout_marginLeft="5dp"
         android:id="@+id/edit_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_message_remind"
-        android:text="@string/remind_message"
-        style="@style/TextPink"/>
+        android:text="@string/remind_message_begin_fertility"
+        style="@style/TextPink"
+        android:theme="@style/AppTheme.Cursor"
+        android:layout_marginTop="@dimen/len_20"/>
+    <Button
+        android:id="@+id/button_cancel_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_pink_big_button"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/edit_message"
+        android:layout_marginTop="@dimen/len_40"/>
+    <Button
+        android:id="@+id/button_save_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_pink_big_button"
+        android:text="@string/save"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/edit_message"
+        android:layout_marginTop="@dimen/len_40"/>
+
 
 </RelativeLayout>

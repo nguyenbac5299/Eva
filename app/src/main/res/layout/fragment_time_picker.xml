@@ -3,34 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginHorizontal="15dp"
     tools:ignore="MissingDefaultResource">
-    <Button
-        android:id="@+id/button_cancel"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button_small"
-        android:text="@string/cancel"
-        android:textColor="#FFFFFF"/>
+
     <TimePicker
         android:id="@+id/time_picker"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/len_0"
         android:layout_weight="4"
         android:layout_height="wrap_content"
         android:timePickerMode="spinner" />
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button_small"
-        android:text="@string/save"
-        android:textColor="#FFFFFF"/>
-
 
 </LinearLayout>

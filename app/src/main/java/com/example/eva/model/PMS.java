@@ -1,8 +1,112 @@
 package com.example.eva.model;
 
-public class PMS {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public static class symptom {
+import java.io.Serializable;
+
+public class PMS implements Parcelable {
+    int id;
+    String date;
+    String pms;
+    float weight;
+    float temperature;
+    String note;
+
+    protected PMS(Parcel in) {
+        id = in.readInt();
+        date = in.readString();
+        pms = in.readString();
+        weight = in.readFloat();
+        temperature = in.readFloat();
+        note = in.readString();
+    }
+
+    public static final Creator<PMS> CREATOR = new Creator<PMS>() {
+        @Override
+        public PMS createFromParcel(Parcel in) {
+            return new PMS(in);
+        }
+
+        @Override
+        public PMS[] newArray(int size) {
+            return new PMS[size];
+        }
+    };
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public PMS(int id, String date, String pms) {
+        this.id = id;
+        this.date = date;
+        this.pms = pms;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getPms() {
+        return pms;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setPms(String pms) {
+        this.pms = pms;
+    }
+
+    public PMS() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(date);
+        dest.writeString(pms);
+        dest.writeFloat(weight);
+        dest.writeFloat(temperature);
+        dest.writeString(note);
+    }
+
+    public static class Symptom {
         public static final int GOOD = 0;
         public static final int ACNE = 1;
         public static final int STOMACHACHE = 2; //ĐAU BỤNG
@@ -33,7 +137,7 @@ public class PMS {
 
     }
 
-    public static class Feeling {
+    public static class Mood {
         public static final int NORMAL = 0;
         public static final int HAPPY = 1;
         public static final int SAD = 2;

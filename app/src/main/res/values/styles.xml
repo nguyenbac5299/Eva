@@ -1,18 +1,167 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorAppTheme</item>
+        <item name="colorPrimary">@color/colorTheme</item>
         <item name="colorPrimaryDark">@color/colorPinkBackground</item>
-        <item name="colorAccent">@color/colorAppTheme</item>
+        <item name="colorAccent">@color/colorTheme</item>
     </style>
+
+    <style name="AppTheme.Cursor" parent="AppTheme">
+        <item name="colorAccent">@color/colorPinkText</item>
+    </style>
+
     <style name="Theme.MyFancyTheme" parent="android:Theme.Holo">
         <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_24</item>
     </style>
+
     <style name="TimePickerTheme" parent="@android:style/Widget.DeviceDefault.DatePicker">
         <item name="android:divider">@color/colorMainPink</item>
         <item name="android:numbersTextColor">@color/colorMainPink</item>
         <item name="android:textColor">@color/colorMainPink</item>
+    </style>
+
+    <style name="CustomTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/mcv_text_date_light</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor" tools:ignore="DuplicateDefinition">@color/colorTextGrey
+        </item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomHeaderTextCalendar" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/colorMainPink</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/len_30</item>
+    </style>
+
+    <style name="CustomWeekTextCalendar" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/len_22</item>
+    </style>
+
+    <style name="DialogActivity" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:width">100dip</item>
+    </style>
+
+    //style text
+
+    <style name="TextListTitle">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+    </style>
+
+    <style name="TextSubTitle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextTitle">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubTitleHealthy">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/colorTextGrey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubTitleSetup">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/colorTextGrey</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextDescription">
+        <item name="android:textSize">@dimen/len_18</item>
+        <item name="android:textColor">@color/colorTextGrey</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TextChartTitle">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextTitleRemind">
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="TextContentRemind">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/colorTextGrey</item>
+    </style>
+
+    <style name="TextChartSubTitle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextPink">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/colorMainPink</item>
+    </style>
+
+    <style name="TextTimePink">
+        <item name="android:textSize">@dimen/len_34</item>
+        <item name="android:textColor">@color/colorPinkText</item>
+    </style>
+
+    <style name="TextNumberPink">
+        <item name="android:textSize">@dimen/len_40</item>
+        <item name="android:textColor">@color/colorPinkText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextHealthy">
+        <item name="android:background">@drawable/bg_circle_healthy</item>
+        <item name="android:textColor">@color/colorMainPink</item>
+        <item name="android:textSize">19dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextTitleDialog">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">23dp</item>
+        <item name="android:textColor">@color/colorMainPink</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStepCalendar">
+        <item name="android:layout_width">@dimen/len_60</item>
+        <item name="android:layout_height">@dimen/len_60</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/len_40</item>
+    </style>
+
+    <style name="ViewLinearPink">
+        <item name="android:layout_width">@dimen/len_3</item>
+        <item name="android:layout_height">@dimen/len_60</item>
+        <item name="android:layout_marginLeft">@dimen/len_30</item>
+        <item name="android:layout_marginVertical">@dimen/len_4</item>
+    </style>
+
+    <style name="TextContentStep">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/len_30</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:paddingTop">@dimen/len_10</item>
+        <item name="android:layout_marginLeft">@dimen/len_20</item>
     </style>
 
 </resources>

@@ -2,14 +2,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp">
+    android:layout_margin="@dimen/len_30">
     <ImageView
         android:id="@+id/image_remind"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/len_60"
+        android:layout_height="@dimen/len_60"
         android:src="@drawable/ic_start_pergant"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="@dimen/len_20"/>
     <Switch
         android:layout_centerVertical="true"
         android:id="@+id/switch_remind"
@@ -24,18 +24,16 @@
         android:layout_toLeftOf="@+id/switch_remind"
         android:layout_toRightOf="@+id/image_remind"
         android:text="@string/start_fertility_title"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="16sp"/>
+        style="@style/TextTitleRemind"/>
     <TextView
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/len_4"
         android:id="@+id/text_content_remind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_title_remind"
         android:layout_below="@+id/text_title_remind"
         android:layout_alignRight="@+id/text_title_remind"
-        android:text="@string/start_period_content"
-        android:textSize="13sp"/>
+        style="@style/TextContentRemind"/>
 
 
 </RelativeLayout>

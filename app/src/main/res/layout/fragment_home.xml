@@ -1,63 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/piechart"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/len_20"
+        android:background="@color/colorHomeDetailPeriod"
+        android:orientation="vertical"
+        android:padding="@dimen/len_14">
+
+        <TextView
+            android:id="@+id/text_title_home"
+            style="@style/TextSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Thời gian giai đoạn" />
+
+        <TextView
+            android:id="@+id/text_number_day"
+            style="@style/TextChartSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="(5 ngày)" />
+
+        <LinearLayout
+            android:id="@+id/layout_not_ovulation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/len_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextChartSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_start_day" />
+
+                <TextView
+                    android:id="@+id/text_start_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/len_14"
+                    android:text="demo" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/len_1"
+                android:layout_height="@dimen/len_80"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/len_20"
+                android:background="@color/colorLine" />
+
+            <LinearLayout
+                android:layout_width="@dimen/len_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextChartSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_end_day" />
+
+                <TextView
+                    android:id="@+id/text_end_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/len_14"
+                    android:text="demo" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_day_ovulation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_10"
+            android:gravity="center"
+            android:text="demo"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-    <LinearLayout
-        android:id="@+id/layout_home"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:background="@drawable/circle_pink_textview">
-        <TextView
-            android:id="@+id/text_date"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Th4, 28 thg 10"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:textColor="@color/colorWhite"
-            />
-        <TextView
-            android:id="@+id/text_period"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Giai đoạn"
-            />
-        <TextView
-            android:id="@+id/text_number_date"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="Ngày 1"
-            android:gravity="center"
-            android:textSize="35dp"
-            />
-        <TextView
-            android:id="@+id/text_description_period"
-            android:layout_width="120dp"
-            android:layout_gravity="center"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:lines="2"
-            android:layout_marginBottom="15dp"
-            android:text="Giai đoạn kết thúc vào: "
-            />
-    </LinearLayout>
-    <TextView
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/custom_button"
-        />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/len_60">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/piechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/layout_home"
+                    android:layout_width="@dimen/len_440"
+                    android:layout_height="@dimen/len_440"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_circle_pink_textview"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/len_0"
+                        android:layout_marginTop="@dimen/len_30"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Th4, 28 thg 10"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/len_26" />
+
+                    <TextView
+                        android:id="@+id/text_period"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/len_0"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Giai đoạn"
+                        android:textSize="@dimen/len_32"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_number_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/len_0"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Ngày 1"
+                        android:textSize="@dimen/len_70" />
+
+                    <TextView
+                        android:id="@+id/text_description_period"
+                        android:layout_width="@dimen/len_240"
+                        android:layout_height="@dimen/len_0"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/len_30"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:text="Giai đoạn kết thúc vào: "
+                        android:textSize="@dimen/len_28" />
+                </LinearLayout>
+
+                <!--        <com.google.android.gms.ads.AdView-->
+                <!--            android:id="@+id/adView"-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            ads:adSize="SMART_BANNER"-->
+                <!--            ads:adUnitId="@string/banner_ad_home_id"-->
+                <!--            android:layout_gravity="center_horizontal|bottom"/>-->
+
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fl_adplaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:minHeight="@dimen/len_90" />
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>
